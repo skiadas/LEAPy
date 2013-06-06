@@ -1,0 +1,168 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The placement_instructions.txt file &mdash; LEAPy 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="LEAPy 1.0 documentation" href="index.html" />
+    <link rel="up" title="Developer Information" href="developer.html" />
+    <link rel="next" title="Creating Templates" href="template_creation.html" />
+    <link rel="prev" title="General Overview" href="overview.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="template_creation.html" title="Creating Templates"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="overview.html" title="General Overview"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">LEAPy 1.0 documentation</a> &raquo;</li>
+          <li><a href="developer.html" accesskey="U">Developer Information</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-placement-instructions-txt-file">
+<h1>The placement_instructions.txt file<a class="headerlink" href="#the-placement-instructions-txt-file" title="Permalink to this headline">¶</a></h1>
+<p>The <tt class="file docutils literal"><span class="pre">placement_instructions</span></tt> file allows you to customize how placement will take place. It has two distinct sections. The sections are separated in the file by the presence of one or more empty lines.</p>
+<span class="target" id="module-student"></span><div class="section" id="placement-definitions">
+<h2>Placement Definitions<a class="headerlink" href="#placement-definitions" title="Permalink to this headline">¶</a></h2>
+<p>The first section indicates the various possible placements, and it starts at the beginning of the file, until an empty line is encountered. Each placement can contain any number of keys. These can be used in templates (when creating letters for instance). The format for placements is as follows:</p>
+<div class="highlight-python"><pre>placement_code1:
+    key1: value1
+    key2: value2
+    etc
+placement_code2:
+    key1: value1
+    key2: value2
+    etc</pre>
+</div>
+<p>An unindented line ending in a colon indicates the code that the system will refer to address the placement. The indented <tt class="samp docutils literal"><span class="pre">key:</span> <span class="pre">value</span></tt> pairs represent characteristics of that placement. They can be used to customize input in templates. The indentation is important, make sure to preserve it! You should at the very least define keys <tt class="samp docutils literal"><span class="pre">short</span></tt> and <tt class="samp docutils literal"><span class="pre">name</span></tt>.</p>
+</div>
+<div class="section" id="placement-algorithm">
+<h2>Placement Algorithm<a class="headerlink" href="#placement-algorithm" title="Permalink to this headline">¶</a></h2>
+<p>The second section dictates the algorithm for how to place a particular student, and it starts after the first empty line is encountered. Any number of empty lines might precede it. It comprises any number of lines of the form:</p>
+<div class="highlight-python"><pre>expression =&gt; placement_code</pre>
+</div>
+<p>Where <tt class="samp docutils literal"><span class="pre">placement_code</span></tt> is one of the codes defined in the first section, and <tt class="samp docutils literal"><span class="pre">expression</span></tt> is an expression that will be evaluated, and if it turns out to be <tt class="samp docutils literal"><span class="pre">True</span></tt> then the student will be placed in the corresponding placement and the search for a placement will end. The only tokens allowed in expressions are logicals, order operators, numerics, <tt class="samp docutils literal"><span class="pre">None</span></tt>, and the <tt class="samp docutils literal"><span class="pre">is</span></tt> operator. Any other token will be interpreted as either a key present in the student&#8217;s dictionary, or if it is not a key it will be assumed to be an attribute of the student object. If it is callable it will be called. So for example the following line will place in Math 111 all students who have a placement score of 14 and above and have had pre-calculus, assuming that the Student object has an attribute <tt class="samp docutils literal"><span class="pre">placement_score</span></tt> and a function <tt class="samp docutils literal"><span class="pre">has_precalc</span></tt> returning <tt class="samp docutils literal"><span class="pre">True</span></tt> if the student has taken pre-calc, and false otherwise:</p>
+<div class="highlight-python"><pre>placement_score &gt;= 14 and has_precalc =&gt; Mat111</pre>
+</div>
+<p>The expressions are evaluated in order till one is <tt class="samp docutils literal"><span class="pre">True</span></tt>. The last line of this section should <em>always</em> be:</p>
+<div class="highlight-python"><pre>True =&gt; placement_code</pre>
+</div>
+<p>This will indicate that if the student has not been placed with any of the previous test, this placement should be used.</p>
+</div>
+<div class="section" id="custom-functions">
+<h2>Custom Functions<a class="headerlink" href="#custom-functions" title="Permalink to this headline">¶</a></h2>
+<p>Currently there is no way to add custom instructions similar to <tt class="samp docutils literal"><span class="pre">has_precalc</span></tt>, but this is planned for the future. For a list of the currently available functions and attributes, see <a class="reference internal" href="student.html#student.Student" title="student.Student"><tt class="xref py py-class docutils literal"><span class="pre">Student</span></tt></a>.</p>
+</div>
+<div class="section" id="advanced">
+<h2>Advanced<a class="headerlink" href="#advanced" title="Permalink to this headline">¶</a></h2>
+<p>The details of the processing of these expressions are performed in the <tt class="xref py py-mod docutils literal"><span class="pre">my_parser</span></tt> module. In particular, the evaluation of word tokens is performed using the function <tt class="xref py py-mod docutils literal"><span class="pre">follow</span></tt> and the methods that call it.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The placement_instructions.txt file</a><ul>
+<li><a class="reference internal" href="#placement-definitions">Placement Definitions</a></li>
+<li><a class="reference internal" href="#placement-algorithm">Placement Algorithm</a></li>
+<li><a class="reference internal" href="#custom-functions">Custom Functions</a></li>
+<li><a class="reference internal" href="#advanced">Advanced</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="overview.html"
+                        title="previous chapter">General Overview</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="template_creation.html"
+                        title="next chapter">Creating Templates</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/placement_instructions.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="template_creation.html" title="Creating Templates"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="overview.html" title="General Overview"
+             >previous</a> |</li>
+        <li><a href="index.html">LEAPy 1.0 documentation</a> &raquo;</li>
+          <li><a href="developer.html" >Developer Information</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Charilaos Skiadas.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

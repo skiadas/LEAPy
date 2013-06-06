@@ -1,0 +1,19 @@
+id: id_num, student id
+last: last_name, last name
+first: first_name, given, first name
+nick: prefered, preferred, pref
+status: entrance_cde
+act: actm, actmt, actm*
+sat: satm, satmt, satm*
+placement_score: hc exam, hanover college calculus placement exam, placement score
+placement_name: placement name
+calculus: AP Calculus
+past_courses: past courses, courses
+placement: placement,
+major: possible major
+acad: academic interests, interests, academic
+math_interest: interest
+know_integrals: integrals
+room: rm
+hc_grade: grade
+survey_result: should take

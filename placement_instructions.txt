@@ -1,0 +1,38 @@
+121c:
+    code: Mat 121c
+    short: MAT 121c
+    name: MAT 121 Calculus I or higher
+121:
+    code: Mat 121
+    short: MAT 121
+    name: MAT 121 Calculus I
+111:
+    code: Mat 111
+    short: MAT 111
+    name: MAT 111 Calculus with Review I
+none:
+    code: none
+    short: 
+    name: No placement
+dept:
+    code: dept
+    short: see dept
+    name: See department if interested in taking Calculus
+notcalc:
+    code: notcalc
+    short: no calc
+    name: Will not be taking Calculus
+
+
+survey_result is None => none
+not(needs_wants_calc) => notcalc
+survey_result == 2 => 121c
+survey_result == 3 => notcalc
+placement_score is None => dept
+not(has_precalc) and not(has_calc) => dept
+has_calc and placement_score >= 32 => 121c
+has_calc and placement_score >= 20 => 121
+has_calc and placement_score >= 10  => 111
+placement_score >= 25              => 121
+placement_score >= 10               => 111
+True                               => dept

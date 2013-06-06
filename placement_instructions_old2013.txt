@@ -1,0 +1,32 @@
+121e:
+    code: Mat 121e
+    short: Mat 121+
+    name: Calculus I or higher
+121:
+    code: Mat 121
+    short: Mat 121
+    name: Calculus I
+111:
+    code: Mat 111
+    short: Mat 111
+    name: Calculus with Review I
+none:
+    code: none
+    short: 
+    name: Not ready for Calculus
+dept:
+    code: dept
+    short: see dept
+    name: See department if interested in taking Calculus
+
+
+
+
+placement_score is None => none
+not(has_precalc) and not(has_calc) => dept
+has_calc and placement_score >= 32 => 121e
+has_calc and placement_score >= 20 => 121
+has_calc and placement_score >= 10  => 111
+placement_score >= 25              => 121
+placement_score >= 10               => 111
+True                               => dept

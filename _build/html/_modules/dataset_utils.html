@@ -1,0 +1,251 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dataset_utils &mdash; LEAPy 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="LEAPy 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">LEAPy 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for dataset_utils</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">xlrd</span>
+<span class="kn">import</span> <span class="nn">xlwt</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">urllib</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">izip</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">cycle</span><span class="p">,</span> <span class="n">repeat</span>
+<span class="kn">from</span> <span class="nn">my_utils</span> <span class="kn">import</span> <span class="n">JINJA_TEX_ENV</span><span class="p">,</span> <span class="n">JINJA_HTML_ENV</span><span class="p">,</span> <span class="n">standardize_key</span>
+
+<div class="viewcode-block" id="fix_col"><a class="viewcode-back" href="../dataset.html#dataset_utils.fix_col">[docs]</a><span class="k">def</span> <span class="nf">fix_col</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;If a column consists of only numbers, turns them to such. Treats empty strings as missing values and replaces them with None.&quot;&quot;&quot;</span>
+	<span class="k">def</span> <span class="nf">_try_convert</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">val</span><span class="o">==</span><span class="s">&#39;&#39;</span><span class="p">:</span>
+			<span class="k">return</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="k">try</span><span class="p">:</span>
+				<span class="k">return</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+			<span class="k">except</span><span class="p">:</span>
+				<span class="k">return</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+	<span class="k">try</span><span class="p">:</span>
+		<span class="k">return</span><span class="p">([</span><span class="n">_try_convert</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">])</span>
+	<span class="k">except</span><span class="p">:</span>
+		<span class="k">return</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Dataset"><a class="viewcode-back" href="../dataset.html#dataset_utils.Dataset">[docs]</a><span class="k">class</span> <span class="nc">Dataset</span><span class="p">:</span>
+	<span class="n">_FILE_ASSOCIATIONS</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;csv&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;csv&#39;</span><span class="p">,</span> <span class="s">&#39;txt&#39;</span><span class="p">],</span> <span class="s">&#39;excel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;xls&#39;</span><span class="p">],</span> <span class="s">&#39;html&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;html&#39;</span><span class="p">,</span> <span class="s">&#39;htm&#39;</span><span class="p">]}</span>
+	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;Expects a list of rows. First entry is variable names. &quot;&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">varnames</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">fix_col</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">val</span><span class="p">))</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">)]</span> <span class="c"># Turns numeric values to such</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">)]</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">dict</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">varnames</span><span class="p">,</span> <span class="n">row</span><span class="p">))</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">]</span>
+	<span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dict</span><span class="o">.</span><span class="n">__iter__</span><span class="p">())</span>
+	<span class="c"># def next(self):</span>
+	<span class="c"># 	self.dict.next()</span>
+<div class="viewcode-block" id="Dataset.get_col"><a class="viewcode-back" href="../dataset.html#dataset_utils.Dataset.get_col">[docs]</a>	<span class="k">def</span> <span class="nf">get_col</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;Accepts column descriptions via number starting at 0 or column name. Also accepts lists of column descriptions.&quot;&quot;&quot;</span>
+		<span class="k">if</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
+			<span class="k">return</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">get_col</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">col</span><span class="p">])</span>
+		<span class="k">elif</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="nb">str</span><span class="p">)):</span>
+			<span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_col</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">varnames</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">col</span><span class="p">)))</span>
+		<span class="k">else</span><span class="p">:</span> <span class="c"># It&#39;s an integer</span>
+			<span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="n">col</span><span class="p">])</span></div>
+<div class="viewcode-block" id="Dataset.get_row"><a class="viewcode-back" href="../dataset.html#dataset_utils.Dataset.get_row">[docs]</a>	<span class="k">def</span> <span class="nf">get_row</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;Accepts row by row number. Can do a list of rows.&quot;&quot;&quot;</span>
+		<span class="k">if</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
+			<span class="k">return</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">get_row</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">])</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">[</span><span class="n">row</span><span class="p">])</span>
+	</div>
+	<span class="nd">@classmethod</span>
+	<span class="k">def</span> <span class="nf">_Read_csv</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;docstring for reader_csv&quot;&quot;&quot;</span>
+		<span class="n">rdr</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+		<span class="k">return</span><span class="p">(</span><span class="n">Dataset</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rdr</span><span class="p">]))</span>
+		
+	<span class="nd">@classmethod</span>
+	<span class="k">def</span> <span class="nf">_Read_excel</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;Note: Will only attempt to read the first sheet from the Excel file&quot;&quot;&quot;</span>
+		<span class="n">sheet</span> <span class="o">=</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">open_workbook</span><span class="p">(</span><span class="n">file_contents</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">read</span><span class="p">())</span><span class="o">.</span><span class="n">sheet_by_index</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+		<span class="n">ncols</span><span class="p">,</span> <span class="n">nrows</span> <span class="o">=</span> <span class="n">sheet</span><span class="o">.</span><span class="n">ncols</span><span class="p">,</span> <span class="n">sheet</span><span class="o">.</span><span class="n">nrows</span>
+		<span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="n">sheet</span><span class="o">.</span><span class="n">row_values</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nrows</span><span class="p">)]</span>
+		<span class="c"># validrows = [row for row in rows if (row)[ncols-1] is not &#39;&#39;]</span>
+		<span class="c"># print(validrows)</span>
+		<span class="k">return</span><span class="p">(</span><span class="n">Dataset</span><span class="p">(</span><span class="n">rows</span><span class="p">))</span>
+		
+	<span class="nd">@classmethod</span>
+	<span class="k">def</span> <span class="nf">_Read_html</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;docstring for read_html&quot;&quot;&quot;</span>
+		<span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+			<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+		<span class="n">table_regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">&quot;&lt;table .*?&gt;(.*?)&lt;/table&gt;&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span>
+		<span class="n">row_regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">&quot;&lt;tr.*?&gt;(.*?)&lt;/tr&gt;&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span>
+		<span class="n">entry_regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">&quot;&lt;t[dh].*?&gt;(.*?)&lt;/t[dh]&gt;&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span>
+		<span class="n">m</span> <span class="o">=</span> <span class="n">table_regex</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">m</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+			<span class="n">dataset</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+		<span class="k">return</span><span class="p">(</span><span class="n">Dataset</span><span class="p">([</span><span class="n">entry_regex</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">row_regex</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">dataset</span><span class="p">)]))</span>
+	<span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Dataset.Read"><a class="viewcode-back" href="../dataset.html#dataset_utils.Dataset.Read">[docs]</a>	<span class="k">def</span> <span class="nf">Read</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">filetype</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;Reads datasets in either an Excel or a CSV form, or from a HTML table. Expects first row to be variable names, every subsequent row to be data, and that no extra rows are present. Returns the result as a list of dictionaries, one for each data row. The dictionaries have the variable names as keys. Only understands character and numeric data at this point.&quot;&quot;&quot;</span>
+		<span class="c"># Check if dataset looks like a filename: It would basically be all in one line and have</span>
+		<span class="c"># an extension</span>
+		<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">raw</span><span class="p">:</span>
+			<span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&quot;^(.*)\.([^\.]*)$&quot;</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+			<span class="k">if</span> <span class="p">(</span><span class="n">m</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">):</span>   <span class="c"># filename!!</span>
+				<span class="k">if</span> <span class="n">filetype</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+					<span class="n">filetype</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>   <span class="c"># Pick up filetype from extension if not provided</span>
+					<span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">_FILE_ASSOCIATIONS</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+						<span class="k">if</span> <span class="n">filetype</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
+							<span class="n">filetype</span> <span class="o">=</span> <span class="n">k</span>
+				<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span> <span class="k">as</span> <span class="n">_data</span><span class="p">:</span>
+					<span class="k">return</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">Read</span><span class="p">(</span><span class="n">_data</span><span class="p">,</span> <span class="n">filetype</span><span class="p">))</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="c"># dataset contains our actual data stream</span>
+			<span class="n">call</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;csv&#39;</span><span class="p">:</span> <span class="n">cls</span><span class="o">.</span><span class="n">_Read_csv</span><span class="p">,</span> <span class="s">&#39;excel&#39;</span><span class="p">:</span> <span class="n">cls</span><span class="o">.</span><span class="n">_Read_excel</span><span class="p">,</span> <span class="s">&#39;html&#39;</span><span class="p">:</span> <span class="n">cls</span><span class="o">.</span><span class="n">_Read_html</span><span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">filetype</span><span class="p">)</span>
+			<span class="k">if</span> <span class="n">call</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+				<span class="k">raise</span><span class="p">(</span><span class="n">TypeException</span><span class="p">,</span> <span class="s">&quot;Unknown file type: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">filetype</span><span class="p">)</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="k">return</span><span class="p">(</span><span class="n">call</span><span class="p">(</span><span class="n">dataset</span><span class="p">))</span></div>
+	<span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Dataset.Read_survey"><a class="viewcode-back" href="../dataset.html#dataset_utils.Dataset.Read_survey">[docs]</a>	<span class="k">def</span> <span class="nf">Read_survey</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span> 
+		<span class="n">results</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="s">&quot;http://exam.hanover.edu/tests/math1/list_results.php&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+		<span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s">&quot;Calculus Interest Survey Results&quot;</span><span class="p">,</span> <span class="n">results</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+			<span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s">&quot;Encountered problems trying to read the Interest Survey Results. Please make sure the web site is available: http://exam.hanover.edu/tests/math1/list_results.php&quot;</span><span class="p">)</span>
+		<span class="n">tbl</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">&quot;&lt;table&gt;(.*?)&lt;/table&gt;&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+		<span class="n">tbl</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">&quot;&lt;/?a[^&gt;]*&gt;&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">tbl</span><span class="p">)</span> <span class="c"># Stripping &lt;a&gt; tags</span>
+		<span class="k">return</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">Read</span><span class="p">(</span><span class="n">tbl</span><span class="p">,</span> <span class="s">&#39;html&#39;</span><span class="p">,</span> <span class="n">raw</span> <span class="o">=</span> <span class="bp">True</span><span class="p">))</span>
+
+<span class="c"># Exporting Facilities</span></div>
+<div class="viewcode-block" id="Dataset.export_html"><a class="viewcode-back" href="../dataset.html#dataset_utils.Dataset.export_html">[docs]</a>	<span class="k">def</span> <span class="nf">export_html</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span> <span class="o">=</span> <span class="p">[],</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwrds</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;Keys = None means export all columns.</span>
+<span class="sd">		The keywords following will decorate the html tags. Each expects a list of dictionaries, and will alternate those dictionaries on consecutive cells.</span>
+<span class="sd">		row_decorations: Used on the &lt;tr&gt; tag of the data rows</span>
+<span class="sd">		row_cell_decorations: Used on the &lt;td&gt; tags of the data rows</span>
+<span class="sd">		var_decoration: Only one dictionary, used on the &lt;tr&gt; tag of the variables row</span>
+<span class="sd">		var_cell_decorations = Used on the &lt;td&gt; tags of the variables row</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">keys</span><span class="p">):</span>
+		    <span class="n">keys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">varnames</span>
+		    <span class="n">key_names</span> <span class="o">=</span> <span class="n">keys</span>
+		<span class="k">else</span><span class="p">:</span>
+		    <span class="n">key_names</span> <span class="o">=</span> <span class="n">keys</span>
+		    <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">standardize_key</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">]</span>
+		<span class="n">dictionary</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwrds</span><span class="p">)</span>
+		<span class="n">dictionary</span><span class="o">.</span><span class="n">update</span><span class="p">({</span> <span class="s">&#39;keys&#39;</span><span class="p">:</span>  <span class="n">keys</span><span class="p">,</span> <span class="s">&#39;rows&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict</span><span class="p">,</span> <span class="s">&#39;key_names&#39;</span><span class="p">:</span> <span class="n">key_names</span><span class="p">})</span>
+		<span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dict</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+		<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;var_cell_decorations&#39;</span><span class="p">,</span> <span class="s">&#39;row_cell_decorations&#39;</span><span class="p">,</span> <span class="s">&#39;row_decorations&#39;</span><span class="p">]:</span>
+			<span class="n">dictionary</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">cycle</span><span class="p">(</span><span class="n">dictionary</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">[{}]))</span>
+		<span class="n">env</span> <span class="o">=</span> <span class="n">JINJA_HTML_ENV</span>
+		<span class="c"># This part feels ugly</span>
+		<span class="n">env</span><span class="o">.</span><span class="n">globals</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s">&#39;dictionary&#39;</span><span class="p">:</span> <span class="n">dictionary</span><span class="p">})</span>
+		<span class="n">template</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s">&#39;html_table_template.html&#39;</span><span class="p">)</span>
+		<span class="k">return</span><span class="p">(</span><span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">dictionary</span><span class="p">))</span>
+	</div>
+<div class="viewcode-block" id="Dataset.export_excel"><a class="viewcode-back" href="../dataset.html#dataset_utils.Dataset.export_excel">[docs]</a>	<span class="k">def</span> <span class="nf">export_excel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">file</span><span class="p">,</span> <span class="n">sheet_name</span> <span class="o">=</span> <span class="s">&quot;Sheet 1&quot;</span><span class="p">,</span> <span class="n">keys</span> <span class="o">=</span> <span class="p">[]):</span>
+		<span class="sd">&quot;&quot;&quot;Keys = None means export all columns.&quot;&quot;&quot;</span>
+		<span class="k">if</span> <span class="n">keys</span> <span class="o">==</span> <span class="p">[]:</span> <span class="n">keys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">varnames</span>
+		<span class="n">heading_xf</span> <span class="o">=</span> <span class="n">xlwt</span><span class="o">.</span><span class="n">easyxf</span><span class="p">(</span><span class="s">&#39;font: bold on; align: wrap off, vert centre, horiz center; border: left thin, right thin, bottom thin, top thin&#39;</span><span class="p">)</span>
+		<span class="n">row_xf</span> <span class="o">=</span> <span class="n">xlwt</span><span class="o">.</span><span class="n">easyxf</span><span class="p">(</span><span class="s">&#39;border: left thin, right thin&#39;</span><span class="p">)</span>
+		<span class="n">wbook</span> <span class="o">=</span> <span class="n">xlwt</span><span class="o">.</span><span class="n">Workbook</span><span class="p">()</span>
+		<span class="n">sheet</span> <span class="o">=</span> <span class="n">wbook</span><span class="o">.</span><span class="n">add_sheet</span><span class="p">(</span><span class="n">sheet_name</span><span class="p">)</span>
+		<span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">izip</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">keys</span><span class="p">):</span>
+			<span class="n">sheet</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">heading_xf</span><span class="p">)</span>
+			<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">st</span> <span class="ow">in</span> <span class="n">izip</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict</span><span class="p">):</span>
+				<span class="n">sheet</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)),</span> <span class="n">row_xf</span><span class="p">)</span>
+		<span class="n">wbook</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+		<span class="k">return</span>
+
+<span class="c"># with open(&quot;tests/Leap5_math_placements.xls&quot;, &quot;rb&quot;) as dataset:</span>
+<span class="c"># 	sheet = xlrd.open_workbook(file_contents=dataset.read()).sheet_by_index(0)</span>
+<span class="c"># 	ncols, nrows = sheet.ncols, sheet.nrows</span>
+<span class="c"># 	rows = [sheet.row_values(i) for i in range(nrows)]</span>
+<span class="c"># 	validrows = [row for row in rows if (row)[ncols-1] is not &#39;&#39;]</span>
+<span class="c"># 	return(Dataset(validrows))</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">LEAPy 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Charilaos Skiadas.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

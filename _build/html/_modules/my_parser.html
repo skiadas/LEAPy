@@ -1,0 +1,263 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>my_parser &mdash; LEAPy 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="LEAPy 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">LEAPy 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for my_parser</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">operator</span> <span class="kn">as</span> <span class="nn">oper</span>
+
+<div class="viewcode-block" id="expression"><a class="viewcode-back" href="../my_parser.html#my_parser.expression">[docs]</a><span class="k">def</span> <span class="nf">expression</span><span class="p">(</span><span class="n">rbp</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">token</span><span class="p">,</span> <span class="n">_context</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">token</span>
+    <span class="n">token</span> <span class="o">=</span> <span class="nb">next</span><span class="p">()</span>
+    <span class="n">left</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">nud</span><span class="p">()</span>
+    <span class="k">while</span> <span class="n">rbp</span> <span class="o">&lt;</span> <span class="n">token</span><span class="o">.</span><span class="n">lbp</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">token</span>
+        <span class="n">token</span> <span class="o">=</span> <span class="nb">next</span><span class="p">()</span>
+        <span class="n">left</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">led</span><span class="p">(</span><span class="n">left</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">left</span>
+</div>
+<div class="viewcode-block" id="follow"><a class="viewcode-back" href="../my_parser.html#my_parser.follow">[docs]</a><span class="k">def</span> <span class="nf">follow</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="s">&quot;Word tokens will use this function to find how to interpret themselves. The context can be a class, function or dictionary, as long as it can be called with the token value, or has the value as a key, or as an attribute.&quot;</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="n">context</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">context</span><span class="p">)</span> <span class="k">else</span> <span class="n">context</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">context</span> <span class="k">else</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span> <span class="k">else</span> <span class="bp">None</span>
+    <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">val</span><span class="p">):</span> <span class="n">val</span> <span class="o">=</span> <span class="n">val</span><span class="p">()</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="parse"><a class="viewcode-back" href="../my_parser.html#my_parser.parse">[docs]</a><span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="n">program</span><span class="p">,</span> <span class="n">context</span> <span class="o">=</span> <span class="p">{}):</span>
+    <span class="k">global</span> <span class="n">token</span><span class="p">,</span> <span class="nb">next</span><span class="p">,</span> <span class="n">_context</span>
+    <span class="n">_context</span> <span class="o">=</span> <span class="n">context</span>
+    <span class="nb">next</span> <span class="o">=</span> <span class="n">tokenize</span><span class="p">(</span><span class="n">program</span><span class="p">)</span><span class="o">.</span><span class="n">next</span>
+    <span class="n">token</span> <span class="o">=</span> <span class="nb">next</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">expression</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="symbol_base"><a class="viewcode-back" href="../my_parser.html#my_parser.symbol_base">[docs]</a><span class="k">class</span> <span class="nc">symbol_base</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="nb">id</span> <span class="o">=</span> <span class="bp">None</span> <span class="c"># node/token type name</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="bp">None</span> <span class="c"># used by literals</span>
+    <span class="n">first</span> <span class="o">=</span> <span class="n">second</span> <span class="o">=</span> <span class="n">third</span> <span class="o">=</span> <span class="bp">None</span> <span class="c"># used by tree nodes</span>
+<div class="viewcode-block" id="symbol_base.nud"><a class="viewcode-back" href="../my_parser.html#my_parser.symbol_base.nud">[docs]</a>    <span class="k">def</span> <span class="nf">nud</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">SyntaxError</span><span class="p">(</span><span class="s">&quot;Syntax error (</span><span class="si">%r</span><span class="s">).&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span></div>
+<div class="viewcode-block" id="symbol_base.led"><a class="viewcode-back" href="../my_parser.html#my_parser.symbol_base.led">[docs]</a>    <span class="k">def</span> <span class="nf">led</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">left</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">SyntaxError</span><span class="p">(</span><span class="s">&quot;Unknown operator (</span><span class="si">%r</span><span class="s">).&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="s">&quot;(name)&quot;</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="s">&quot;(literal)&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&quot;(</span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">second</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">third</span><span class="p">]</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">filter</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">out</span><span class="p">))</span>
+        <span class="k">return</span> <span class="s">&quot;(&quot;</span> <span class="o">+</span> <span class="s">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;)&quot;</span>
+</div>
+<span class="n">symbol_table</span> <span class="o">=</span> <span class="p">{}</span>
+<div class="viewcode-block" id="symbol"><a class="viewcode-back" href="../my_parser.html#my_parser.symbol">[docs]</a><span class="k">def</span> <span class="nf">symbol</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">bp</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">symbol_table</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="k">class</span> <span class="nc">s</span><span class="p">(</span><span class="n">symbol_base</span><span class="p">):</span>
+            <span class="k">pass</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">__name__</span> <span class="o">=</span> <span class="s">&quot;symbol-&quot;</span> <span class="o">+</span> <span class="nb">id</span> <span class="c"># for debugging</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">lbp</span> <span class="o">=</span> <span class="n">bp</span>
+        <span class="n">symbol_table</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">lbp</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">bp</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">lbp</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">s</span>
+</div>
+<div class="viewcode-block" id="infix"><a class="viewcode-back" href="../my_parser.html#my_parser.infix">[docs]</a><span class="k">def</span> <span class="nf">infix</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">bp</span><span class="p">,</span> <span class="n">op</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">led</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">left</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">op</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">expression</span><span class="p">(</span><span class="n">bp</span><span class="p">))</span>
+    <span class="n">symbol</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">bp</span><span class="p">)</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="n">led</span>
+</div>
+<div class="viewcode-block" id="prefix"><a class="viewcode-back" href="../my_parser.html#my_parser.prefix">[docs]</a><span class="k">def</span> <span class="nf">prefix</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">bp</span><span class="p">,</span> <span class="n">op</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">nud</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">op</span><span class="p">(</span><span class="n">expression</span><span class="p">(</span><span class="n">bp</span><span class="p">))</span>
+    <span class="n">symbol</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span><span class="o">.</span><span class="n">nud</span> <span class="o">=</span> <span class="n">nud</span>
+</div>
+<div class="viewcode-block" id="infix_r"><a class="viewcode-back" href="../my_parser.html#my_parser.infix_r">[docs]</a><span class="k">def</span> <span class="nf">infix_r</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">bp</span><span class="p">,</span> <span class="n">op</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">led</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">left</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">op</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">expression</span><span class="p">(</span><span class="n">bp</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">symbol</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">bp</span><span class="p">)</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="n">led</span>
+</div>
+<div class="viewcode-block" id="constant"><a class="viewcode-back" href="../my_parser.html#my_parser.constant">[docs]</a><span class="k">def</span> <span class="nf">constant</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+    <span class="nd">@method</span><span class="p">(</span><span class="n">symbol</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">val</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">nud</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
+</div>
+<div class="viewcode-block" id="advance"><a class="viewcode-back" href="../my_parser.html#my_parser.advance">[docs]</a><span class="k">def</span> <span class="nf">advance</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">token</span>
+    <span class="k">if</span> <span class="nb">id</span> <span class="ow">and</span> <span class="n">token</span><span class="o">.</span><span class="n">id</span> <span class="o">!=</span> <span class="nb">id</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">SyntaxError</span><span class="p">(</span><span class="s">&quot;Expected </span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span> <span class="nb">id</span><span class="p">)</span>
+    <span class="n">token</span> <span class="o">=</span> <span class="nb">next</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="method"><a class="viewcode-back" href="../my_parser.html#my_parser.method">[docs]</a><span class="k">def</span> <span class="nf">method</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="c"># decorator</span>
+    <span class="k">assert</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">symbol_base</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">bind</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">fn</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">fn</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">bind</span>
+</div>
+<span class="n">symbol</span><span class="p">(</span><span class="s">&quot;(number)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">nud</span> <span class="o">=</span> <span class="k">lambda</span> <span class="bp">self</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<span class="n">constant</span><span class="p">(</span><span class="bp">True</span><span class="p">);</span> <span class="n">constant</span><span class="p">(</span><span class="bp">False</span><span class="p">);</span> <span class="n">constant</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+<span class="n">symbol</span><span class="p">(</span><span class="s">&quot;+&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&quot;-&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">symbol</span><span class="p">(</span><span class="s">&quot;*&quot;</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">symbol</span><span class="p">(</span><span class="s">&quot;**&quot;</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">op</span> <span class="ow">in</span> <span class="p">[(</span><span class="s">&quot;and&quot;</span><span class="p">,</span> <span class="n">oper</span><span class="o">.</span><span class="n">and_</span><span class="p">),</span> <span class="p">(</span><span class="s">&quot;or&quot;</span><span class="p">,</span> <span class="n">oper</span><span class="o">.</span><span class="n">or_</span><span class="p">),</span> <span class="p">(</span><span class="s">&quot;is&quot;</span><span class="p">,</span> <span class="n">oper</span><span class="o">.</span><span class="n">is_</span><span class="p">),</span> <span class="p">(</span><span class="s">&quot;is not&quot;</span><span class="p">,</span> <span class="n">oper</span><span class="o">.</span><span class="n">is_not</span><span class="p">)]:</span> <span class="n">infix</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="n">op</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">op</span> <span class="ow">in</span> <span class="p">[(</span><span class="s">&quot;&gt;=&quot;</span><span class="p">,</span> <span class="n">oper</span><span class="o">.</span><span class="n">ge</span><span class="p">),(</span><span class="s">&quot;&lt;=&quot;</span><span class="p">,</span> <span class="n">oper</span><span class="o">.</span><span class="n">le</span><span class="p">),(</span><span class="s">&quot;==&quot;</span><span class="p">,</span> <span class="n">oper</span><span class="o">.</span><span class="n">eq</span><span class="p">),</span> <span class="p">(</span><span class="s">&quot;&gt;&quot;</span><span class="p">,</span> <span class="n">oper</span><span class="o">.</span><span class="n">gt</span><span class="p">),</span> <span class="p">(</span><span class="s">&quot;&lt;&quot;</span><span class="p">,</span> <span class="n">oper</span><span class="o">.</span><span class="n">lt</span><span class="p">)]:</span> <span class="n">infix</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">op</span><span class="p">)</span>
+<span class="n">prefix</span><span class="p">(</span><span class="s">&quot;not&quot;</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="n">oper</span><span class="o">.</span><span class="n">not_</span><span class="p">)</span>
+<span class="n">symbol</span><span class="p">(</span><span class="s">&quot;(end)&quot;</span><span class="p">)</span>
+<span class="n">infix</span><span class="p">(</span><span class="s">&quot;+&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">oper</span><span class="o">.</span><span class="n">add</span><span class="p">);</span> <span class="n">infix</span><span class="p">(</span><span class="s">&quot;-&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">oper</span><span class="o">.</span><span class="n">sub</span><span class="p">)</span>
+<span class="n">infix</span><span class="p">(</span><span class="s">&quot;*&quot;</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="n">oper</span><span class="o">.</span><span class="n">mul</span><span class="p">);</span> <span class="n">infix</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="n">oper</span><span class="o">.</span><span class="n">truediv</span><span class="p">)</span>
+<span class="n">prefix</span><span class="p">(</span><span class="s">&quot;+&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">);</span> <span class="n">prefix</span><span class="p">(</span><span class="s">&quot;-&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">x</span><span class="p">)</span>
+<span class="n">infix_r</span><span class="p">(</span><span class="s">&quot;**&quot;</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="n">oper</span><span class="o">.</span><span class="n">pow</span><span class="p">)</span>
+<span class="n">prefix</span><span class="p">(</span><span class="s">&quot;=&gt;&quot;</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="p">{</span><span class="n">y</span> <span class="k">if</span> <span class="n">x</span> <span class="k">else</span> <span class="bp">False</span><span class="p">}</span> <span class="p">)</span>
+<span class="nd">@method</span><span class="p">(</span><span class="n">symbol</span><span class="p">(</span><span class="s">&quot;(word)&quot;</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">nud</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">_context</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">follow</span><span class="p">(</span><span class="n">_context</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">))</span>
+
+<span class="nd">@method</span><span class="p">(</span><span class="n">symbol</span><span class="p">(</span><span class="s">&quot;(&quot;</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">nud</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">expr</span> <span class="o">=</span> <span class="n">expression</span><span class="p">()</span>
+    <span class="n">advance</span><span class="p">(</span><span class="s">&quot;)&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">expr</span>
+<span class="n">symbol</span><span class="p">(</span><span class="s">&quot;)&quot;</span><span class="p">)</span>
+
+
+<span class="n">token_pat</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">r&quot;\s*(?:(\d+(?:\.\d+)?)|([+-/*]|[&gt;&lt;=]=|[&gt;&lt;]|=&gt;|(?:is )not|is|and|or|not|[\(\)]|True|False|None)|([\w_.]+))&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="tokenize"><a class="viewcode-back" href="../my_parser.html#my_parser.tokenize">[docs]</a><span class="k">def</span> <span class="nf">tokenize</span><span class="p">(</span><span class="n">program</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">number</span><span class="p">,</span> <span class="n">operator</span><span class="p">,</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">token_pat</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">program</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">number</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&quot;(number)&quot;</span><span class="p">)()</span>
+            <span class="n">s</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">number</span>
+            <span class="k">yield</span> <span class="n">s</span>
+        <span class="k">elif</span> <span class="n">operator</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">symbol</span><span class="p">(</span><span class="n">operator</span><span class="p">)()</span>
+        <span class="k">elif</span> <span class="n">word</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&quot;(word)&quot;</span><span class="p">)()</span>
+            <span class="n">s</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">word</span>
+            <span class="k">yield</span> <span class="n">s</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">SyntaxError</span><span class="p">(</span><span class="s">&quot;unknown expression.&quot;</span><span class="p">)</span>
+    <span class="k">yield</span> <span class="n">symbol</span><span class="p">(</span><span class="s">&quot;(end)&quot;</span><span class="p">)</span>
+    <span class="k">yield</span> <span class="ne">StopIteration</span>
+</div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="k">class</span> <span class="nc">TestContext</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">has_calc</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="bp">self</span><span class="p">[</span><span class="s">&#39;has_precalc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">def</span> <span class="nf">placement_score</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="mi">42</span>
+
+    <span class="n">instr</span> <span class="o">=</span> <span class="s">r&#39;&#39;&#39;3+4.5 + 5</span>
+<span class="s">2+3*5</span>
+<span class="s">2+3*5.0 == 17</span>
+<span class="s">(2+3)*5</span>
+<span class="s">True and False</span>
+<span class="s">False or True</span>
+<span class="s">placement_score</span>
+<span class="s">has_calc</span>
+<span class="s">has_precalc</span>
+<span class="s">placement_score is None =&gt; none</span>
+<span class="s">not(has_precalc) and not(has_calc) =&gt; dept</span>
+<span class="s">has_calc and placement_score &gt;= 32 =&gt; 121e</span>
+<span class="s">has_calc and placement_score &gt;= 16 =&gt; 121</span>
+<span class="s">has_precalc and placement_score &gt;= 6  =&gt; 111</span>
+<span class="s">placement_score &gt;= 26              =&gt; 121</span>
+<span class="s">placement_score &gt;= 6               =&gt; 111</span>
+<span class="s">True                               =&gt; dept&#39;&#39;&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+
+
+    <span class="n">test_c</span> <span class="o">=</span> <span class="n">TestContext</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">instr</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">x</span>
+        <span class="k">print</span> <span class="s">&quot;=&gt;&quot;</span><span class="p">,</span> <span class="n">parse</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">context</span> <span class="o">=</span> <span class="n">test_c</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">LEAPy 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Charilaos Skiadas.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

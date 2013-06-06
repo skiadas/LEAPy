@@ -1,0 +1,9 @@
+tests/
+testing*
+rooms.*
+PlacementsForJan*
+LEAPFiles/
+*.zip
+.DS_Store
+*.pyc
+survey_results*

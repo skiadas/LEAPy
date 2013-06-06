@@ -1,0 +1,155 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Using LEAPy &mdash; LEAPy 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="LEAPy 1.0 documentation" href="index.html" />
+    <link rel="next" title="Developer Information" href="developer.html" />
+    <link rel="prev" title="Welcome to LEAPy’s documentation!" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="developer.html" title="Developer Information"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to LEAPy’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">LEAPy 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="using-leapy">
+<h1>Using LEAPy<a class="headerlink" href="#using-leapy" title="Permalink to this headline">¶</a></h1>
+<p>This contains high-end information on how to use LEAPy. For more in-depth information on each of these options, see <a class="reference internal" href="developer.html"><em>Developer Information</em></a>.</p>
+<p>In brief, LEAPy offers us tools to read and process spreadsheets containing student information, as well as produce reports based on this information.</p>
+<div class="section" id="typical-code-segment">
+<h2>Typical code segment<a class="headerlink" href="#typical-code-segment" title="Permalink to this headline">¶</a></h2>
+<p>We first need to load the basic classes used, <tt class="xref py py-class docutils literal"><span class="pre">Dataset</span></tt> and <tt class="xref py py-class docutils literal"><span class="pre">StudentList</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">dataset_utils</span> <span class="kn">import</span> <span class="n">Dataset</span>
+<span class="kn">from</span> <span class="nn">studentList</span> <span class="kn">import</span> <span class="n">StudentList</span>
+</pre></div>
+</div>
+<p>Next, we should load a student list from a dataset. In this case we will use an old Leap placement file:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">students</span> <span class="o">=</span> <span class="n">StudentList</span><span class="p">(</span><span class="n">Dataset</span><span class="o">.</span><span class="n">Read</span><span class="p">(</span><span class="s">&quot;LEAPFiles/Leap5_math_pre_placement.xls&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>We will now merge this with information obtained from another dataset:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">students</span><span class="o">.</span><span class="n">update_from_dataset</span><span class="p">(</span><span class="s">&quot;Last&quot;</span><span class="p">,</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">Read</span><span class="p">(</span><span class="s">&quot;tests/placement_test_scores.csv&quot;</span><span class="p">),</span> <span class="n">target_key</span> <span class="o">=</span> <span class="s">&quot;Last&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The string <tt class="samp docutils literal"><span class="pre">&quot;Last&quot;</span></tt> and the accompanying <tt class="samp docutils literal"><span class="pre">target_key</span> <span class="pre">=</span> <span class="pre">&quot;Last&quot;</span></tt> indicate that the Last name of the students in our list should be matched with the column with name Last from the dataset we read in. The program will identify the students that get matched this way, and it will update their information in the list from the new fields found in the dataset. It will NOT attempt to change existing keys.</p>
+<p>We have now a list of students who have received placement score information from this last command. The next step is to actually perform the placement process:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">students</span><span class="o">.</span><span class="n">perform_placement</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Now that our students have placement information, we can generate their letters:</p>
+<div class="highlight-python"><pre>with open("testing.tex", "w") as f:
+    f.write(students.export_template('tex_letter_template.tex')</pre>
+</div>
+<p>Ideally we would include room information.</p>
+<p>That&#8217;s all for now! Look in <a class="reference internal" href="developer.html"><em>Developer Information</em></a> for basic descriptions of the classes and their main methods, as well as all the finer details of the package.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Using LEAPy</a><ul>
+<li><a class="reference internal" href="#typical-code-segment">Typical code segment</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to LEAPy&#8217;s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="developer.html"
+                        title="next chapter">Developer Information</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/usage.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="developer.html" title="Developer Information"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to LEAPy’s documentation!"
+             >previous</a> |</li>
+        <li><a href="index.html">LEAPy 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Charilaos Skiadas.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

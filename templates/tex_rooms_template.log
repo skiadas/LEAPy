@@ -1,0 +1,1187 @@
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  17 MAY 2013 12:56
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**tex_rooms_template.tex
+(./tex_rooms_template.tex
+LaTeX2e <2009/09/24>
+Babel <v3.8l> and hyphenation patterns for english, dumylang, nohyphenation, ge
+rman-x-2009-06-19, ngerman-x-2009-06-19, afrikaans, ancientgreek, ibycus, arabi
+c, armenian, basque, bulgarian, catalan, pinyin, coptic, croatian, czech, danis
+h, dutch, ukenglish, usenglishmax, esperanto, estonian, ethiopic, farsi, finnis
+h, french, galician, german, ngerman, swissgerman, monogreek, greek, hungarian,
+ icelandic, assamese, bengali, gujarati, hindi, kannada, malayalam, marathi, or
+iya, panjabi, tamil, telugu, indonesian, interlingua, irish, italian, kurmanji,
+ lao, latin, latvian, lithuanian, mongolian, mongolianlmc, bokmal, nynorsk, pol
+ish, portuguese, romanian, russian, sanskrit, serbian, serbianc, slovak, sloven
+ian, spanish, swedish, turkish, turkmen, ukrainian, uppersorbian, welsh, loaded
+.
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/local/texlive/2011/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2010/09/12 v5.6 Page Geometry
+
+(/usr/local/texlive/2011/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2010/03/01 v1.5 Switches for detecting VTeX and its modes (HO)
+Package ifvtex Info: VTeX not detected.
+)
+(/usr/local/texlive/2011/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+\Gm@cnth=\count87
+\Gm@cntv=\count88
+\c@Gm@tempcnt=\count89
+\Gm@bindingoffset=\dimen103
+\Gm@wd@mp=\dimen104
+\Gm@odd@mp=\dimen105
+\Gm@even@mp=\dimen106
+\Gm@layoutwidth=\dimen107
+\Gm@layoutheight=\dimen108
+\Gm@layouthoffset=\dimen109
+\Gm@layoutvoffset=\dimen110
+\Gm@dimlist=\toks15
+)
+(/usr/local/texlive/2011/texmf-dist/tex/latex/droid/droidserif.sty
+Package: droidserif 2011/03/24 Droid Serif
+
+(/usr/local/texlive/2011/texmf-dist/tex/latex/slantsc/slantsc.sty
+Package: slantsc 2003/11/09 v2.10 Provide Slanted an Italic Small Caps
+
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+LaTeX Info: Redefining \upshape on input line 35.
+LaTeX Info: Redefining \slshape on input line 45.
+LaTeX Info: Redefining \itshape on input line 55.
+LaTeX Info: Redefining \scshape on input line 65.
+))
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
+
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/t1enc.def
+File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
+))
+(/usr/local/texlive/2011/texmf-dist/tex/latex/setspace/setspace.sty
+Package: setspace 2000/12/01 6.7 Contributed and Supported LaTeX2e package
+
+Package: `setspace' 6.7 <2000/12/01>
+) (/usr/local/texlive/2011/texmf-dist/tex/latex/paralist/paralist.sty
+Package: paralist 2002/03/18 v2.3b Extended list environments (BS)
+\pltopsep=\skip43
+\plpartopsep=\skip44
+\plitemsep=\skip45
+\plparsep=\skip46
+\pl@lab=\toks16
+)
+(./tex_rooms_template.aux)
+\openout1 = `tex_rooms_template.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Try loading font information for T1+fdr on input line 9.
+
+(/usr/local/texlive/2011/texmf-dist/tex/latex/droid/t1fdr.fd
+File: t1fdr.fd 2011/03/24 Fontinst v1.927 font definitions for T1/fdr.
+)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(72.26999pt, 469.75502pt, 72.26999pt)
+* v-part:(T,H,B)=(72.26999pt, 650.43001pt, 72.26999pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=469.75502pt
+* \textheight=650.43001pt
+* \oddsidemargin=0.0pt
+* \evensidemargin=0.0pt
+* \topmargin=-37.0pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=12.0pt
+* \footskip=30.0pt
+* \marginparwidth=44.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+./tex_rooms_template.tex:10: Undefined control sequence.
+l.10 \pyblock
+             {for rm, stds in itools.groupby(students, helpers.room)}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+[1
+
+{/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    Font shape `T1/fdr/bx/n' in size <24.88> not available
+(Font)              Font shape `T1/fdr/b/n' tried instead on input line 16.
+
+./tex_rooms_template.tex:16: Undefined control sequence.
+<argument> Room \pyvar 
+                       {rm}
+l.16 	\textbf{Room \pyvar{rm}}
+                              
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 20.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 20.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 20.
+./tex_rooms_template.tex:21: Undefined control sequence.
+l.21 	\pyblock
+              {for st in helpers.students_room(rm, students)}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_rooms_template.tex:21: Missing $ inserted.
+<inserted text> 
+                $
+l.21 	\pyblock{for st in helpers.students_
+                                          room(rm, students)}
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./tex_rooms_template.tex:21: Extra }, or forgotten $.
+l.21 ...st in helpers.students_room(rm, students)}
+                                                  
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Undefined control sequence.
+l.22 		\pyvar
+             {st.last}, \pyvar{st.first} & \pyvar{st.placement.short} & \pyv...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_rooms_template.tex:22: Undefined control sequence.
+l.22 		\pyvar{st.last}, \pyvar
+                              {st.first} & \pyvar{st.placement.short} & \pyv...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+./tex_rooms_template.tex:22: Extra }, or forgotten $.
+<inserted text> }
+                 
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_rooms_template.tex:22: Missing } inserted.
+<inserted text> 
+                }
+l.22 		\pyvar{st.last}, \pyvar{st.first} &
+                                           \pyvar{st.placement.short} & \pyv...
+(That makes 100 errors; please try again.) 
+Here is how much of TeX's memory you used:
+ 1250 strings out of 493633
+ 16819 string characters out of 3143378
+ 66412 words of memory out of 3000000
+ 4578 multiletter control sequences out of 15000+200000
+ 16172 words of font info for 29 fonts, out of 3000000 for 9000
+ 831 hyphenation exceptions out of 8191
+ 26i,8n,31p,196b,146s stack positions out of 5000i,500n,10000p,200000b,50000s
+
+./tex_rooms_template.tex:22:  ==> Fatal error occurred, no output PDF file prod
+uced!

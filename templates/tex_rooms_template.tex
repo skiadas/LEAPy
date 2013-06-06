@@ -1,0 +1,28 @@
+\documentclass[12pt]{article}
+\usepackage[vmargin=1in, hmargin=1in]{geometry}
+\usepackage[default]{droidserif}
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage{paralist}
+\doublespacing
+\pagestyle{empty}
+\begin{document}
+\pyblock{for rm, stds in itools.groupby(students, helpers.room)}
+	\newpage
+	{\ }
+		\vfill
+	\begin{center}
+	{\Huge
+	\textbf{Room \pyvar{rm}}
+	}\\
+	\vspace{0.5in}
+	\vfill
+	\begin{tabular}{lrr}
+	\pyblock{for st in helpers.students_room(rm, students)}
+		\pyvar{st.last}, \pyvar{st.first} & \pyvar{st.placement.short} & \pyvar{st.acad}\\
+	\pyblock{endfor}
+  \end{tabular}
+	\end{center}
+	\vfill
+\pyblock{endfor}
+\end{document}

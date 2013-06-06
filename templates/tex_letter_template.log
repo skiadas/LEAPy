@@ -1,0 +1,733 @@
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  16 MAY 2013 10:02
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**tex_letter_template.tex
+(./tex_letter_template.tex
+LaTeX2e <2009/09/24>
+Babel <v3.8l> and hyphenation patterns for english, dumylang, nohyphenation, ge
+rman-x-2009-06-19, ngerman-x-2009-06-19, afrikaans, ancientgreek, ibycus, arabi
+c, armenian, basque, bulgarian, catalan, pinyin, coptic, croatian, czech, danis
+h, dutch, ukenglish, usenglishmax, esperanto, estonian, ethiopic, farsi, finnis
+h, french, galician, german, ngerman, swissgerman, monogreek, greek, hungarian,
+ icelandic, assamese, bengali, gujarati, hindi, kannada, malayalam, marathi, or
+iya, panjabi, tamil, telugu, indonesian, interlingua, irish, italian, kurmanji,
+ lao, latin, latvian, lithuanian, mongolian, mongolianlmc, bokmal, nynorsk, pol
+ish, portuguese, romanian, russian, sanskrit, serbian, serbianc, slovak, sloven
+ian, spanish, swedish, turkish, turkmen, ukrainian, uppersorbian, welsh, loaded
+.
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/local/texlive/2011/texmf-dist/tex/latex/droid/droidserif.sty
+Package: droidserif 2011/03/24 Droid Serif
+
+(/usr/local/texlive/2011/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/local/texlive/2011/texmf-dist/tex/latex/slantsc/slantsc.sty
+Package: slantsc 2003/11/09 v2.10 Provide Slanted an Italic Small Caps
+
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+LaTeX Info: Redefining \upshape on input line 35.
+LaTeX Info: Redefining \slshape on input line 45.
+LaTeX Info: Redefining \itshape on input line 55.
+LaTeX Info: Redefining \scshape on input line 65.
+))
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
+
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/t1enc.def
+File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
+))
+(/usr/local/texlive/2011/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2010/09/12 v5.6 Page Geometry
+
+(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2010/03/01 v1.5 Switches for detecting VTeX and its modes (HO)
+Package ifvtex Info: VTeX not detected.
+)
+(/usr/local/texlive/2011/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+\Gm@cnth=\count87
+\Gm@cntv=\count88
+\c@Gm@tempcnt=\count89
+\Gm@bindingoffset=\dimen103
+\Gm@wd@mp=\dimen104
+\Gm@odd@mp=\dimen105
+\Gm@even@mp=\dimen106
+\Gm@layoutwidth=\dimen107
+\Gm@layoutheight=\dimen108
+\Gm@layouthoffset=\dimen109
+\Gm@layoutvoffset=\dimen110
+\Gm@dimlist=\toks15
+)
+(/usr/local/texlive/2011/texmf-dist/tex/latex/setspace/setspace.sty
+Package: setspace 2000/12/01 6.7 Contributed and Supported LaTeX2e package
+
+Package: `setspace' 6.7 <2000/12/01>
+) (/usr/local/texlive/2011/texmf-dist/tex/latex/paralist/paralist.sty
+Package: paralist 2002/03/18 v2.3b Extended list environments (BS)
+\pltopsep=\skip43
+\plpartopsep=\skip44
+\plitemsep=\skip45
+\plparsep=\skip46
+\pl@lab=\toks16
+)
+(./tex_letter_template.aux)
+\openout1 = `tex_letter_template.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Try loading font information for T1+fdr on input line 12.
+
+(/usr/local/texlive/2011/texmf-dist/tex/latex/droid/t1fdr.fd
+File: t1fdr.fd 2011/03/24 Fontinst v1.927 font definitions for T1/fdr.
+)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(72.26999pt, 469.75502pt, 72.26999pt)
+* v-part:(T,H,B)=(57.81621pt, 679.33757pt, 57.81621pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=469.75502pt
+* \textheight=679.33757pt
+* \oddsidemargin=0.0pt
+* \evensidemargin=0.0pt
+* \topmargin=-51.45378pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=12.0pt
+* \footskip=30.0pt
+* \marginparwidth=44.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+./tex_letter_template.tex:14: Undefined control sequence.
+l.14 \pyblock
+             {for st in students}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+[1
+
+{/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+./tex_letter_template.tex:16: Undefined control sequence.
+l.16 	{\noindent\Large ID: \pyvar
+                                 {st.id_num}\\
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_letter_template.tex:16: Missing $ inserted.
+<inserted text> 
+                $
+l.16 	{\noindent\Large ID: \pyvar{st.id_
+                                        num}\\
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <17.28> on input line 16.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 16.
+./tex_letter_template.tex:16: Extra }, or forgotten $.
+l.16 	{\noindent\Large ID: \pyvar{st.id_num}
+                                            \\
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_letter_template.tex:17: Undefined control sequence.
+l.17 	Student: \pyvar
+                     {st.last}, \pyvar{st.first} \\
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_letter_template.tex:17: Undefined control sequence.
+l.17 	Student: \pyvar{st.last}, \pyvar
+                                      {st.first} \\
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_letter_template.tex:18: Undefined control sequence.
+l.18 	Placement: \pyvar
+                       {st.placement.name}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_letter_template.tex:19: Extra }, or forgotten $.
+l.19 	}
+       
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_letter_template.tex:21: Missing $ inserted.
+<inserted text> 
+                $
+l.21 	\hrule
+            
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--24
+
+ []
+
+./tex_letter_template.tex:26: Undefined control sequence.
+l.26 	\noindent Dear \pyvar
+                           {st.first},
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_letter_template.tex:29: Undefined control sequence.
+l.29 ...ng the online math interest survey\pyblock
+                                                  {if st.took_test()} and th...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_letter_template.tex:29: Missing $ inserted.
+<inserted text> 
+                $
+l.29 ...e math interest survey\pyblock{if st.took_
+                                                  test()} and the online pla...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./tex_letter_template.tex:29: Extra }, or forgotten $.
+l.29 ...interest survey\pyblock{if st.took_test()}
+                                                   and the online placement ...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_letter_template.tex:29: Undefined control sequence.
+l.29 ...t()} and the online placement test\pyblock
+                                                  {endif}.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_letter_template.tex:30: Missing $ inserted.
+<inserted text> 
+                $
+l.30 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./tex_letter_template.tex:31: Undefined control sequence.
+l.31 		\pyblock
+               {if st.placement.code=="notcalc"}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_letter_template.tex:32: Undefined control sequence.
+l.32         \pyblock
+                     {if not(st.survey_result==3)}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_letter_template.tex:32: Missing $ inserted.
+<inserted text> 
+                $
+l.32         \pyblock{if not(st.survey_
+                                       result==3)}
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./tex_letter_template.tex:32: Extra }, or forgotten $.
+l.32         \pyblock{if not(st.survey_result==3)}
+                                                  
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_letter_template.tex:34: Undefined control sequence.
+l.34 	      \pyblock
+                    {else}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_letter_template.tex:36: Undefined control sequence.
+l.36 	      \pyblock
+                    {endif}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_letter_template.tex:37: Undefined control sequence.
+l.37 	  \pyblock
+                {endif}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_letter_template.tex:38: Missing $ inserted.
+<inserted text> 
+                $
+l.38 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (3.46114pt too wide) in paragraph at lines 31--38
+[]\T1/fdr/m/n/17.28 if st.placement.code=="notcalc" if not(st.survey$[]\OML/cmm
+/m/it/17.28 esult \OT1/cmr/m/n/17.28 ==
+ []
+
+
+Overfull \hbox (3931.06874pt too wide) in paragraph at lines 31--38
+\OT1/cmr/m/n/17.28 3)\OML/cmm/m/it/17.28 Basedonyouranswers; youwillnotneedtota
+keamathcourseinyourfirstsemesteratHanover:Dependingonyourinterests; youmayneed=
+choosetotakeAppliedStatisticsinthefuture; oryoumaysatisfytheAFRrequirementviaan
+othercourse:[]Basedonyouranswers; youwillnotneedtotakeamathcourseinyourfirstsem
+esteratHanover:YoumaybeearningAP=TransfercreditforMAT\OT1/cmr/m/n/17.28 121\OML
+/cmm/m/it/17.28 ; whichwillalsosatisfyyourAFRrequirement:Dependingonyourinteres
+ts; youmayneed=choosetotakeAppliedStatisticsinthefuture; oryoumaysatisfytheAFRr
+equirementviaanothercourse\OT1/cmr/m/n/17.28 (\OML/cmm/m/it/17.28 ifneeded\OT1/
+cmr/m/n/17.28 )\OML/cmm/m/it/17.28 :[][]$ 
+ []
+
+./tex_letter_template.tex:40: Undefined control sequence.
+l.40 		\pyblock
+               {if not(st.placement.code=="notcalc" or st.placement.code =="...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_letter_template.tex:41: Undefined control sequence.
+l.41 ...begin calculus at Hanover by taking \pyvar
+                                                  {st.placement.name}.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (10.47218pt too wide) in paragraph at lines 40--42
+[]\T1/fdr/m/n/17.28 if not(st.placement.code=="notcalc" or st.placement.code
+ []
+
+
+Overfull \hbox (129.16922pt too wide) in paragraph at lines 40--42
+\T1/fdr/m/n/17.28 rec-om-mends you be-gin cal-cu-lus at Hanover by tak-ing st.p
+lacement.name. 
+ []
+
+./tex_letter_template.tex:44: Undefined control sequence.
+l.44       \pyblock
+                   {if st.placement.code == "Mat 121c"}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_letter_template.tex:46: Undefined control sequence.
+l.46       \pyblock
+                   {endif}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_letter_template.tex:47: Undefined control sequence.
+l.47       \pyblock
+                   {if st.placement.code == "Mat 111"}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_letter_template.tex:49: Undefined control sequence.
+l.49       \pyblock
+                   {endif}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_letter_template.tex:50: Undefined control sequence.
+l.50     \pyblock
+                 {endif}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (3.28352pt too wide) in paragraph at lines 44--51
+\T1/fdr/m/n/17.28 should con-sider by-pass-ing MAT 121 and start-ing with MAT
+ []
+
+[2]
+./tex_letter_template.tex:55: Undefined control sequence.
+l.55     \pyblock
+                 {if st.placement.code == "dept"}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_letter_template.tex:57: Undefined control sequence.
+l.57     	\pyblock
+                  {if not(st.took_test())}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_letter_template.tex:57: Missing $ inserted.
+<inserted text> 
+                $
+l.57     	\pyblock{if not(st.took_
+                                  test())}
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./tex_letter_template.tex:57: Extra }, or forgotten $.
+l.57     	\pyblock{if not(st.took_test())}
+                                          
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_letter_template.tex:59: Undefined control sequence.
+l.59       \pyblock
+                   {else}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_letter_template.tex:60: Undefined control sequence.
+l.60       	\pyblock
+                    {if st.placement_score < 10}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+./tex_letter_template.tex:61: LaTeX Error: Bad math environment delimiter.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.61 ... the placement test was very low, under \(
+                                                   10 \), indicating difficu...
+
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+./tex_letter_template.tex:62: Undefined control sequence.
+l.62   	    \pyblock
+                    {endif}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_letter_template.tex:63: Undefined control sequence.
+l.63   	    \pyblock
+                    {if st.placement_score >= 10 and not(st.has_precalc()) a...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_letter_template.tex:63: Missing $ inserted.
+<inserted text> 
+                $
+l.63   	    \pyblock{if st.placement_
+                                     score >= 10 and not(st.has_precalc()) a...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./tex_letter_template.tex:63: Extra }, or forgotten $.
+l.63 ...(st.has_precalc()) and not(st.has_calc())}
+                                                  
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./tex_letter_template.tex:65: Undefined control sequence.
+l.65         \pyblock
+                     {endif}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_letter_template.tex:67: Undefined control sequence.
+l.67       \pyblock
+                   {endif}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_letter_template.tex:69: Undefined control sequence.
+l.69   	\pyblock
+                {endif}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_letter_template.tex:70: Missing $ inserted.
+<inserted text> 
+                $
+l.70 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (3.60245pt too wide) in paragraph at lines 55--70
+\T1/fdr/m/n/17.28 swers, we think you may need to take Cal-cu-lus at Hanover.
+ []
+
+
+Overfull \hbox (1345.55307pt too wide) in paragraph at lines 55--70
+\T1/fdr/m/n/17.28 Cal-cu-lus course. if not(st.took$[]\OML/cmm/m/it/17.28 est\O
+T1/cmr/m/n/17.28 ())\OML/cmm/m/it/17.28 Accordingtoourrecords; youdidnottakethe
+onlineplacementexam:Becauseofthis; wearenotabletogiveyouaCalculusplacement:[][]
+Yourscoreintheplacementtestwasverylow; under\OT1/cmr/m/n/17.28 10$\T1/fdr/m/n/1
+7.28 ,
+ []
+
+
+Overfull \hbox (9.48798pt too wide) in paragraph at lines 55--70
+\T1/fdr/m/n/17.28 in-di-cat-ing dif-fi-cul-ties with the pre-cal-cu-lus ma-te-r
+ial needed
+ []
+
+
+Overfull \hbox (1806.70567pt too wide) in paragraph at lines 55--70
+\OT1/cmr/m/n/17.28 10\OML/cmm/m/it/17.28 andnot\OT1/cmr/m/n/17.28 (\OML/cmm/m/i
+t/17.28 st:has[]recalc\OT1/cmr/m/n/17.28 ())\OML/cmm/m/it/17.28 andnot\OT1/cmr/
+m/n/17.28 (\OML/cmm/m/it/17.28 st:has[]alc\OT1/cmr/m/n/17.28 ())\OML/cmm/m/it/1
+7.28 Youindicatedonyoursurveythatyouhavetakenneitherprecalculusnorcalculusinhig
+hschool:[]Basedonthis; thedepartmentdidnotthinkyouwerereadytotakeCalculus:[]Ify
+oudowanttotakeCalculusatHanover; pleasetalktomeatsomepointduringLEAP:[]$ 
+ []
+
+./tex_letter_template.tex:73: Undefined control sequence.
+l.73     \pyblock
+                 {if (st.placement.code == "Mat 121" or st.placement.code ==...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_letter_template.tex:75: Undefined control sequence.
+l.75     \pyblock
+                 {endif}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_letter_template.tex:77: Undefined control sequence.
+l.77     \pyblock
+                 {if st.placement.code == "Mat 121c"}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_letter_template.tex:79: Undefined control sequence.
+l.79     \pyblock
+                 {endif}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_letter_template.tex:81: Undefined control sequence.
+l.81     \pyblock
+                 {if st.placement.code == "Mat 111"}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+./tex_letter_template.tex:83: Undefined control sequence.
+l.83     \pyblock
+                 {endif}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 85.
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+) [3]
+./tex_letter_template.tex:92: Undefined control sequence.
+l.92 \pyblock
+             {endfor}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+[4] (./tex_letter_template.aux) )
+(\end occurred inside a group at level 6)
+
+### simple group (level 6) entered at line 63 ({)
+### simple group (level 5) entered at line 57 ({)
+### simple group (level 4) entered at line 32 ({)
+### simple group (level 3) entered at line 29 ({)
+### simple group (level 2) entered at line 16 ({)
+### simple group (level 1) entered at line 16 ({)
+### bottom level 
+Here is how much of TeX's memory you used:
+ 1259 strings out of 493633
+ 17419 string characters out of 3143378
+ 69418 words of memory out of 3000000
+ 4585 multiletter control sequences out of 15000+200000
+ 13144 words of font info for 28 fonts, out of 3000000 for 9000
+ 831 hyphenation exceptions out of 8191
+ 26i,4n,31p,388b,182s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/local/texlive/2011/texmf-dist/fonts/enc/dvips/cm-super/cm
+-super-t1.enc}{/usr/local/texlive/2011/texmf-dist/fonts/enc/dvips/droid/droid-f
+ixlatin.enc}{/usr/local/texlive/2011/texmf-dist/fonts/enc/dvips/droid/droid-t1.
+enc}</usr/local/texlive/2011/texmf-dist/fonts/type1/public/droid/DroidSerif-Reg
+ular.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
+i12.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
+7.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/cm-super/sftt1728.
+pfb>
+Output written on tex_letter_template.pdf (4 pages, 77979 bytes).
+PDF statistics:
+ 38 PDF objects out of 1000 (max. 8388607)
+ 27 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

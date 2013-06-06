@@ -1,0 +1,155 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The StudentList Class &mdash; LEAPy 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="LEAPy 1.0 documentation" href="index.html" />
+    <link rel="up" title="Class and Package List" href="classes.html" />
+    <link rel="next" title="The Dataset Class" href="dataset.html" />
+    <link rel="prev" title="The Student Class" href="student.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="dataset.html" title="The Dataset Class"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="student.html" title="The Student Class"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">LEAPy 1.0 documentation</a> &raquo;</li>
+          <li><a href="developer.html" >Developer Information</a> &raquo;</li>
+          <li><a href="classes.html" accesskey="U">Class and Package List</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-studentList">
+<span id="the-studentlist-class"></span><h1>The <tt class="xref py py-class docutils literal"><span class="pre">StudentList</span></tt> Class<a class="headerlink" href="#module-studentList" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="studentList.StudentList">
+<em class="property">class </em><tt class="descname">StudentList</tt><big>(</big><em>lst</em><big>)</big><a class="reference internal" href="_modules/studentList.html#StudentList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#studentList.StudentList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">list</span></tt></p>
+<p>Initialize a <a class="reference internal" href="#studentList.StudentList" title="studentList.StudentList"><tt class="xref py py-class docutils literal"><span class="pre">StudentList</span></tt></a> object using provided data. The provided object needs to act as a list of dictionaries. Those dictionaries are passed to the <a class="reference internal" href="student.html#student.Student" title="student.Student"><tt class="xref py py-class docutils literal"><span class="pre">student.Student</span></tt></a> class to form the individual student objects. A typical way to obtain such a list is via a <cite>dataset_utils.Dataset</cite> object.</p>
+<p>Use <a class="reference internal" href="#studentList.StudentList.update_from_dataset" title="studentList.StudentList.update_from_dataset"><tt class="xref py py-meth docutils literal"><span class="pre">update_from_dataset()</span></tt></a> to add new key entries to the students, meth:<cite>perform_placement</cite> to place them according to the rules set (see <a class="reference internal" href="my_utils.html#my_utils.Placement" title="my_utils.Placement"><tt class="xref py py-class docutils literal"><span class="pre">my_utils.Placement</span></tt></a>), meth:<cite>dataset</cite> to convert to a spreadsheet/dataset format, <tt class="xref py py-meth docutils literal"><span class="pre">export_to_template()</span></tt> for generating reports.</p>
+<dl class="method">
+<dt id="studentList.StudentList.update_from_dataset">
+<tt class="descname">update_from_dataset</tt><big>(</big><em>key</em>, <em>sheet</em>, <em>force_update=False</em>, <em>target_key=None</em><big>)</big><a class="reference internal" href="_modules/studentList.html#StudentList.update_from_dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#studentList.StudentList.update_from_dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates any students common to <tt class="samp docutils literal"><span class="pre">self</span></tt> and <tt class="samp docutils literal"><span class="pre">sheet</span></tt> with the information in them. Will use the values described by <tt class="samp docutils literal"><span class="pre">key</span></tt> and <tt class="samp docutils literal"><span class="pre">target_key</span></tt> respectively to identify which students in the two datasets match. <tt class="samp docutils literal"><span class="pre">sheet</span></tt> needs to be <a class="reference internal" href="dataset.html#dataset_utils.Dataset" title="dataset_utils.Dataset"><tt class="xref py py-class docutils literal"><span class="pre">dataset_utils.Dataset</span></tt></a> object. If <tt class="samp docutils literal"><span class="pre">force_changes</span></tt> is <tt class="samp docutils literal"><span class="pre">True</span></tt>, the method will update the values of any keys that are present in <tt class="samp docutils literal"><span class="pre">sheet</span></tt>, overwriting any possibly existing values. This will rarely be what you want. If <tt class="samp docutils literal"><span class="pre">target_key</span></tt> is <tt class="samp docutils literal"><span class="pre">None</span></tt>, it will use the same key on both datasets. The conversions in <a class="reference internal" href="my_utils.html#my_utils.standardize_key" title="my_utils.standardize_key"><tt class="xref py py-meth docutils literal"><span class="pre">my_utils.standardize_key()</span></tt></a> are in place.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="studentList.StudentList.perform_placement">
+<tt class="descname">perform_placement</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/studentList.html#StudentList.perform_placement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#studentList.StudentList.perform_placement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple wrapper for <a class="reference internal" href="student.html#student.Student.perform_placement" title="student.Student.perform_placement"><tt class="xref py py-meth docutils literal"><span class="pre">student.Student.perform_placement()</span></tt></a>. Attempts to assign a placement to every student.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="studentList.StudentList.dataset">
+<tt class="descname">dataset</tt><big>(</big><em>keys=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="_modules/studentList.html#StudentList.dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#studentList.StudentList.dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <tt class="samp docutils literal"><span class="pre">self</span></tt> in a dataset format. Uses all keys present unless a list is specified.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="studentList.StudentList.export_template">
+<tt class="descname">export_template</tt><big>(</big><em>template</em>, <em>format=None</em>, <em>sortby=None</em><big>)</big><a class="reference internal" href="_modules/studentList.html#StudentList.export_template"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#studentList.StudentList.export_template" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exports the student information according to the template specified. LaTeX or HTML output is possible by setting <tt class="samp docutils literal"><span class="pre">format='tex'</span></tt> or <tt class="samp docutils literal"><span class="pre">'html'</span></tt>. If no format specified, and the template is a filename string, it will use the extension to determine the format. Returns the output stream. See <a class="reference internal" href="template_creation.html"><em>Creating Templates</em></a> for more information on templates.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="student.html"
+                        title="previous chapter">The <tt class="docutils literal docutils literal docutils literal"><span class="pre">Student</span></tt> Class</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="dataset.html"
+                        title="next chapter">The Dataset Class</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/studentList.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="dataset.html" title="The Dataset Class"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="student.html" title="The Student Class"
+             >previous</a> |</li>
+        <li><a href="index.html">LEAPy 1.0 documentation</a> &raquo;</li>
+          <li><a href="developer.html" >Developer Information</a> &raquo;</li>
+          <li><a href="classes.html" >Class and Package List</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Charilaos Skiadas.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,179 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The my_utils Module &mdash; LEAPy 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="LEAPy 1.0 documentation" href="index.html" />
+    <link rel="up" title="Class and Package List" href="classes.html" />
+    <link rel="next" title="The Expression Parser" href="my_parser.html" />
+    <link rel="prev" title="The Dataset Class" href="dataset.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="my_parser.html" title="The Expression Parser"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="dataset.html" title="The Dataset Class"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">LEAPy 1.0 documentation</a> &raquo;</li>
+          <li><a href="developer.html" >Developer Information</a> &raquo;</li>
+          <li><a href="classes.html" accesskey="U">Class and Package List</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-my-utils-module">
+<h1>The <a class="reference internal" href="#module-my_utils" title="my_utils"><tt class="xref py py-mod docutils literal"><span class="pre">my_utils</span></tt></a> Module<a class="headerlink" href="#the-my-utils-module" title="Permalink to this headline">¶</a></h1>
+<p>The <tt class="xref py py-mod docutils literal"><span class="pre">mu_utils</span></tt> module contains certain constants and helper functions, in addition to the <tt class="xref py py-class docutils literal"><span class="pre">Placement</span></tt> class, which performs the actual grunt work of placing students based on a given set of rules.</p>
+<span class="target" id="module-my_utils"></span><dl class="function">
+<dt id="my_utils.standardize_key">
+<tt class="descname">standardize_key</tt><big>(</big><em>key</em><big>)</big><a class="reference internal" href="_modules/my_utils.html#standardize_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#my_utils.standardize_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses the key associations loaded from <tt class="file docutils literal"><span class="pre">key_associations.txt</span></tt> to standardize the value of <cite>key</cite>. Returns <tt class="samp docutils literal"><span class="pre">None</span></tt> if it does not find the key. This function is used by the <a class="reference internal" href="student.html#student.Student" title="student.Student"><tt class="xref py py-class docutils literal"><span class="pre">student.Student</span></tt></a> class to standardize the keys allowed by that class. The associations can be found in the file <tt class="file docutils literal"><span class="pre">key_associations.txt</span></tt>. Change the file at your own discretion.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="my_utils.JINJA_TEX_ENV">
+<tt class="descname">JINJA_TEX_ENV</tt><a class="headerlink" href="#my_utils.JINJA_TEX_ENV" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Jinja2 environment used for LaTeX templates. See <a class="reference internal" href="template_creation.html"><em>Creating Templates</em></a> for more details.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="my_utils.JINJA_HTML_ENV">
+<tt class="descname">JINJA_HTML_ENV</tt><a class="headerlink" href="#my_utils.JINJA_HTML_ENV" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Jinja2 environment used for HTML templates. See <a class="reference internal" href="template_creation.html"><em>Creating Templates</em></a> for more details.</p>
+</dd></dl>
+
+<div class="section" id="the-placement-class">
+<h2>The <a class="reference internal" href="#my_utils.Placement" title="my_utils.Placement"><tt class="xref py py-class docutils literal"><span class="pre">Placement</span></tt></a> class<a class="headerlink" href="#the-placement-class" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="class">
+<dt id="my_utils.Placement">
+<em class="property">class </em><tt class="descname">Placement</tt><a class="reference internal" href="_modules/my_utils.html#Placement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#my_utils.Placement" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <a class="reference internal" href="#my_utils.Placement" title="my_utils.Placement"><tt class="xref py py-class docutils literal"><span class="pre">Placement</span></tt></a> class forms an umbrella for all operations needed with regards to placement. It reads the information in <tt class="file docutils literal"><span class="pre">placement_instructions.txt</span></tt> to produce appropriate Singleton classes for each placement type, as well as the instructions on how to place a student. For more information on this file, see <a class="reference internal" href="placement_instructions.html"><em>The placement_instructions.txt file</em></a>.</p>
+<dl class="attribute">
+<dt id="my_utils.Placement._placements">
+<tt class="descname">_placements</tt><a class="headerlink" href="#my_utils.Placement._placements" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>A dictionary of possible placements. The values are objects of a private class, whose attributes and corresponding values are the pairs specified for that placement in <tt class="file docutils literal"><span class="pre">placement_instructions.txt</span></tt> and are read at start-up.</p>
+<dl class="attribute">
+<dt id="my_utils.Placement._expressions">
+<tt class="descname">_expressions</tt><a class="headerlink" href="#my_utils.Placement._expressions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>A list of pairs <tt class="samp docutils literal"><span class="pre">(expression,</span> <span class="pre">placement)</span></tt>, where <tt class="samp docutils literal"><span class="pre">expression</span></tt> is an expression to be evaluated for each student, the <tt class="samp docutils literal"><span class="pre">placement</span></tt> is the corresponding placement key, from <a class="reference internal" href="#my_utils.Placement._placements" title="my_utils.Placement._placements"><tt class="xref py py-attr docutils literal"><span class="pre">_placements</span></tt></a>.</p>
+<dl class="classmethod">
+<dt id="my_utils.Placement.Perform_placement">
+<em class="property">classmethod </em><tt class="descname">Perform_placement</tt><big>(</big><em>student</em><big>)</big><a class="reference internal" href="_modules/my_utils.html#Placement.Perform_placement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#my_utils.Placement.Perform_placement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Goes through the list in <a class="reference internal" href="#my_utils.Placement._expressions" title="my_utils.Placement._expressions"><tt class="xref py py-attr docutils literal"><span class="pre">_expressions</span></tt></a>, processing those expression for the current <tt class="samp docutils literal"><span class="pre">student</span></tt>, and returning the placement corresponding to the first True expression.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The <tt class="docutils literal"><span class="pre">my_utils</span></tt> Module</a><ul>
+<li><a class="reference internal" href="#the-placement-class">The <tt class="docutils literal"><span class="pre">Placement</span></tt> class</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="dataset.html"
+                        title="previous chapter">The Dataset Class</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="my_parser.html"
+                        title="next chapter">The Expression Parser</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/my_utils.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="my_parser.html" title="The Expression Parser"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="dataset.html" title="The Dataset Class"
+             >previous</a> |</li>
+        <li><a href="index.html">LEAPy 1.0 documentation</a> &raquo;</li>
+          <li><a href="developer.html" >Developer Information</a> &raquo;</li>
+          <li><a href="classes.html" >Class and Package List</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Charilaos Skiadas.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

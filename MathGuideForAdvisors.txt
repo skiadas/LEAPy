@@ -1,0 +1,16 @@
+Some key information regarding our math placement. Our process is broadly the following:
+
+- The student is asked to take a short online survey on their major interests and math background. Some students may be asked to furhter take an online exam.
+- A placement of "no Calculus" is given to students who seem unlikely to want or need Calculus. These students should probably hold off on an AFR course (except possibly CS110).
+- A placement of "MAT 111" indicates that, based on their responses, the student might want or need Calculus at some point. But they have somewhat weak math skills, and should postpone taking 111 unless they have a compelling reason to do so (many students in this category are overwhelmed by the demands of Calculus on top of adjusting to College expectations).
+- A placement of "MAT 121" indicates that, based on their responses and exam score, the student will likely need Calculus and is mathematically prepared for MAT 121.
+- A placement of "MAT 121c" indicates that, based on their responses, the student is currently studying Calculus in an AP or College level course. Such a student is most definitely ready for MAT 121. If the student is interested in starting Math at a higher level, they should discuss their options with the roaming math advisor present at the LEAP session.
+- Finally, a placement of "dept" indicates that the student has expressed an interest in a major that requires Calculus or has indicated an interest in taking Calculus, but their placement exam score indicates they are really not ready for it. Such a student should probably discuss their options with the roaming math advisor present at the LEAP session.
+
+
+Some other key things that students (and advisors) should keep in mind:
+
+- There are a number of non-Calculus math courses that satisfy the AFR requirement. In particular students interested in CBP or any discipline (other than Econ) that uses statistics would probably want to take MAT 217 in the Winter or in their Sophomore year; Elementary Education majors will want to take MAT 212 (not a Fall course). Another alternative is MAT 210, "Math Topics for the Liberal Arts", offered most Spring Terms.
+- There are non-math ways to satisfy the AFR requirement, CS 110 being an option at the 100- level, ENG 210, PHI 234 and PHI 321 at the 200- and 300- levels. Students with interest in Computer Science should consider taking CS 110 in the Fall.
+- Those students who take MAT 121 in the Fall and want to continue with MAT 122 in the Winter should avoid GW during MTWF 9-10.
+- While MAT 111 Calc with Review I satisfies the AFR requirement, it does not satisfy the Calculus requirement for any majors that require Calculus. Students should probably not consider it as a way to satisfy the AFR requirement unless they need Calculus for their interests.

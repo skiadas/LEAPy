@@ -1,0 +1,143 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>studentList &mdash; LEAPy 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="LEAPy 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">LEAPy 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for studentList</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">my_utils</span> <span class="kn">import</span> <span class="n">JINJA_TEX_ENV</span><span class="p">,</span> <span class="n">JINJA_HTML_ENV</span>
+<span class="kn">from</span> <span class="nn">student</span> <span class="kn">import</span> <span class="n">Student</span><span class="p">,</span> <span class="n">standardize_key</span>
+<span class="kn">from</span> <span class="nn">dataset_utils</span> <span class="kn">import</span> <span class="n">Dataset</span>
+<div class="viewcode-block" id="StudentList"><a class="viewcode-back" href="../studentList.html#studentList.StudentList">[docs]</a><span class="k">class</span> <span class="nc">StudentList</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Initialize a :class:`StudentList` object using provided data. The provided object needs to act as a list of dictionaries. Those dictionaries are passed to the :class:`student.Student` class to form the individual student objects. A typical way to obtain such a list is via a `dataset_utils.Dataset` object.</span>
+<span class="sd">    </span>
+<span class="sd">    Use :meth:`update_from_dataset` to add new key entries to the students, meth:`perform_placement` to place them according to the rules set (see :class:`my_utils.Placement`), meth:`dataset` to convert to a spreadsheet/dataset format, :meth:`export_to_template` for generating reports.&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lst</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">StudentList</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">dct</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Student</span><span class="p">(</span><span class="n">dct</span><span class="p">))</span>
+
+<div class="viewcode-block" id="StudentList.update_from_dataset"><a class="viewcode-back" href="../studentList.html#studentList.StudentList.update_from_dataset">[docs]</a>    <span class="k">def</span> <span class="nf">update_from_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">sheet</span><span class="p">,</span> <span class="n">force_update</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span> <span class="n">target_key</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Updates any students common to :samp:`self` and :samp:`sheet` with the information in them. Will use the values described by :samp:`key` and :samp:`target_key` respectively to identify which students in the two datasets match. :samp:`sheet` needs to be :class:`dataset_utils.Dataset` object. If :samp:`force_changes` is :samp:`True`, the method will update the values of any keys that are present in :samp:`sheet`, overwriting any possibly existing values. This will rarely be what you want. If :samp:`target_key` is :samp:`None`, it will use the same key on both datasets. The conversions in :meth:`my_utils.standardize_key` are in place.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">target_key</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">standardize_key</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="n">target_key</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">standardize_key</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">st</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">sheet</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">st</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">==</span> <span class="n">row</span><span class="p">[</span><span class="n">target_key</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="n">force_update</span><span class="p">:</span>
+                        <span class="n">st</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">st</span><span class="o">.</span><span class="n">safe_update</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+                    <span class="k">break</span></div>
+<div class="viewcode-block" id="StudentList.perform_placement"><a class="viewcode-back" href="../studentList.html#studentList.StudentList.perform_placement">[docs]</a>    <span class="k">def</span> <span class="nf">perform_placement</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Simple wrapper for :meth:`student.Student.perform_placement`. Attempts to assign a placement to every student.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="n">val</span><span class="o">.</span><span class="n">perform_placement</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="StudentList.dataset"><a class="viewcode-back" href="../studentList.html#studentList.StudentList.dataset">[docs]</a>    <span class="k">def</span> <span class="nf">dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span> <span class="o">=</span> <span class="p">[]):</span>
+        <span class="sd">&quot;&quot;&quot;Returns :samp:`self` in a dataset format. Uses all keys present unless a list is specified.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">keys</span> <span class="o">==</span> <span class="p">[]:</span>
+            <span class="n">keys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+                <span class="n">keys</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">Dataset</span><span class="p">([</span><span class="n">keys</span><span class="p">]</span> <span class="o">+</span> <span class="p">[[</span><span class="n">st</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">]</span> <span class="k">for</span> <span class="n">st</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">]))</span>
+</div>
+<div class="viewcode-block" id="StudentList.export_template"><a class="viewcode-back" href="../studentList.html#studentList.StudentList.export_template">[docs]</a>    <span class="k">def</span> <span class="nf">export_template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">sortby</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Exports the student information according to the template specified. LaTeX or HTML output is possible by setting :samp:`format=&#39;tex&#39;` or :samp:`&#39;html&#39;`. If no format specified, and the template is a filename string, it will use the extension to determine the format. Returns the output stream. See :doc:`template_creation` for more information on templates.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">format</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">format</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">env</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&#39;tex&#39;</span><span class="p">:</span> <span class="n">JINJA_TEX_ENV</span><span class="p">,</span> <span class="s">&#39;html&#39;</span><span class="p">:</span> <span class="n">JINJA_HTML_ENV</span><span class="p">}[</span><span class="n">format</span><span class="p">]</span>
+        <span class="n">students</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="k">if</span> <span class="n">sortby</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">students</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">students</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="n">sortby</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="n">template</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">({</span><span class="s">&#39;students&#39;</span><span class="p">:</span> <span class="n">students</span><span class="p">}))</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">LEAPy 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Charilaos Skiadas.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

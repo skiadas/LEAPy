@@ -1,0 +1,198 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The Student Class &mdash; LEAPy 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="LEAPy 1.0 documentation" href="index.html" />
+    <link rel="up" title="Class and Package List" href="classes.html" />
+    <link rel="next" title="The StudentList Class" href="studentList.html" />
+    <link rel="prev" title="Class and Package List" href="classes.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="studentList.html" title="The StudentList Class"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="classes.html" title="Class and Package List"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">LEAPy 1.0 documentation</a> &raquo;</li>
+          <li><a href="developer.html" >Developer Information</a> &raquo;</li>
+          <li><a href="classes.html" accesskey="U">Class and Package List</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-student">
+<span id="the-student-class"></span><h1>The <tt class="xref py py-class docutils literal"><span class="pre">Student</span></tt> Class<a class="headerlink" href="#module-student" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="student.Student">
+<em class="property">class </em><tt class="descname">Student</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/student.html#Student"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#student.Student" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">dict</span></tt></p>
+<p>The Student class represents one student. It works as a dictionary but only accepts certain keys and automatically converts certain other keys to them. TODO create list of the keys. You usually don&#8217;t need to work with this class directly, use <a class="reference internal" href="studentList.html#studentList.StudentList" title="studentList.StudentList"><tt class="xref py py-class docutils literal"><span class="pre">studentList.StudentList</span></tt></a> instead. Here are the main keys (this can be changed by editing the file <tt class="file docutils literal"><span class="pre">key_associations.txt</span></tt>):</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> &#8211; The student&#8217;s id number.</li>
+<li><strong>last</strong> &#8211; Last name</li>
+<li><strong>first</strong> &#8211; First name</li>
+<li><strong>nick</strong> &#8211; Nickname / Preferred name</li>
+<li><strong>status</strong> &#8211; International student, Freshman etc</li>
+<li><strong>act</strong> &#8211; ACT score (Math)</li>
+<li><strong>sat</strong> &#8211; SAT score (Math)</li>
+<li><strong>placement_score</strong> &#8211; The score in the placement exam</li>
+<li><strong>placement_name</strong> &#8211; Deprecated. Use <cite>placement</cite> instead</li>
+<li><strong>past_courses</strong> &#8211; A <tt class="samp docutils literal"><span class="pre">&amp;</span></tt> separated list of abbreviations for courses the student took in High School. Used to determine for instance if the student has taken Calculus.</li>
+<li><strong>placement</strong> &#8211; The student&#8217;s placement. It is a <a class="reference internal" href="my_utils.html#my_utils.Placement" title="my_utils.Placement"><tt class="xref py py-class docutils literal"><span class="pre">my_utils.Placement</span></tt></a> object.</li>
+<li><strong>major</strong> &#8211; A <tt class="samp docutils literal"><span class="pre">|</span></tt> separated list of possible majors the student might be interested in.</li>
+<li><strong>math_interest</strong> &#8211; y/n/m (maybe) depending on whether the student is interested in math.</li>
+<li><strong>know_integrals</strong> &#8211; y/n depending on whether the student knows about integrals.</li>
+<li><strong>room</strong> &#8211; The room the student is assigned for LEAP</li>
+<li><strong>hc_grade</strong> &#8211; The student&#8217;s average letter grade in High School</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="student.Student.get">
+<tt class="descname">get</tt><big>(</big><em>key</em>, <em>default=None</em><big>)</big><a class="reference internal" href="_modules/student.html#Student.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#student.Student.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>All getters and setters have been overwriten, in order for key standardization to take place.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="student.Student.update">
+<tt class="descname">update</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/student.html#Student.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#student.Student.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replaces keys or adds new keys based on those provided, after standardizing them. This, along with <a class="reference internal" href="#student.Student.safe_update" title="student.Student.safe_update"><tt class="xref py py-meth docutils literal"><span class="pre">safe_update()</span></tt></a>, are the recommended method for updating <a class="reference internal" href="#student.Student" title="student.Student"><tt class="xref py py-class docutils literal"><span class="pre">Student</span></tt></a> objects.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="student.Student.safe_update">
+<tt class="descname">safe_update</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/student.html#Student.safe_update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#student.Student.safe_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Like <a class="reference internal" href="#student.Student.update" title="student.Student.update"><tt class="xref py py-meth docutils literal"><span class="pre">update()</span></tt></a> but will not change existing keys. Useful for merging information from new data sources.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="student.Student.has_calc">
+<tt class="descname">has_calc</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/student.html#Student.has_calc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#student.Student.has_calc" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if the student has taken Calculus.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="student.Student.has_precalc">
+<tt class="descname">has_precalc</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/student.html#Student.has_precalc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#student.Student.has_precalc" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if the student has taken pre-Calculus.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="student.Student.is_premed">
+<tt class="descname">is_premed</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/student.html#Student.is_premed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#student.Student.is_premed" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if the student is interested in pre-med.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="student.Student.perform_placement">
+<tt class="descname">perform_placement</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/student.html#Student.perform_placement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#student.Student.perform_placement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses <a class="reference internal" href="my_utils.html#my_utils.Placement.Perform_placement" title="my_utils.Placement.Perform_placement"><tt class="xref py py-meth docutils literal"><span class="pre">my_utils.Placement.Perform_placement()</span></tt></a> to assign a placement to the student.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="classes.html"
+                        title="previous chapter">Class and Package List</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="studentList.html"
+                        title="next chapter">The <tt class="docutils literal docutils literal"><span class="pre">StudentList</span></tt> Class</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/student.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="studentList.html" title="The StudentList Class"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="classes.html" title="Class and Package List"
+             >previous</a> |</li>
+        <li><a href="index.html">LEAPy 1.0 documentation</a> &raquo;</li>
+          <li><a href="developer.html" >Developer Information</a> &raquo;</li>
+          <li><a href="classes.html" >Class and Package List</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Charilaos Skiadas.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

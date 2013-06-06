@@ -1,0 +1,178 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>student &mdash; LEAPy 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="LEAPy 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">LEAPy 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for student</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">my_utils</span> <span class="kn">import</span> <span class="n">standardize_key</span><span class="p">,</span> <span class="n">Placement</span>
+<span class="c"># from string import Template</span>
+<div class="viewcode-block" id="Student"><a class="viewcode-back" href="../student.html#student.Student">[docs]</a><span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The Student class represents one student. It works as a dictionary but only accepts certain keys and automatically converts certain other keys to them. TODO create list of the keys. You usually don&#39;t need to work with this class directly, use :class:`studentList.StudentList` instead.&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">standardize_key</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">return</span><span class="p">(</span><span class="nb">dict</span><span class="o">.</span><span class="n">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">))</span>
+<div class="viewcode-block" id="Student.get"><a class="viewcode-back" href="../student.html#student.Student.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">standardize_key</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">default</span></div>
+    <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">standardize_key</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="nb">dict</span><span class="o">.</span><span class="n">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dictrepr</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">(</span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">dictrepr</span><span class="p">)</span>
+<div class="viewcode-block" id="Student.update"><a class="viewcode-back" href="../student.html#student.Student.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Replaces keys or adds new keys based on those provided, after standardizing them.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">dict</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="bp">self</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span></div>
+<div class="viewcode-block" id="Student.safe_update"><a class="viewcode-back" href="../student.html#student.Student.safe_update">[docs]</a>    <span class="k">def</span> <span class="nf">safe_update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Like :func:`update` but will not change existing keys. Useful for merging information from new data sources.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">dict</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+                <span class="bp">self</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span></div>
+<div class="viewcode-block" id="Student.has_calc"><a class="viewcode-back" href="../student.html#student.Student.has_calc">[docs]</a>    <span class="k">def</span> <span class="nf">has_calc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;True if the student has taken Calculus.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&#39;past_courses&#39;</span><span class="p">)):</span>
+            <span class="k">return</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">(</span><span class="s">&#39;calc&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="s">&#39;past_courses&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;&amp;&quot;</span><span class="p">))</span></div>
+<div class="viewcode-block" id="Student.has_precalc"><a class="viewcode-back" href="../student.html#student.Student.has_precalc">[docs]</a>    <span class="k">def</span> <span class="nf">has_precalc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;True if the student has taken pre-Calculus.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&#39;past_courses&#39;</span><span class="p">)):</span>
+            <span class="k">return</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">(</span><span class="s">&#39;precalc&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="s">&#39;past_courses&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;&amp;&quot;</span><span class="p">))</span></div>
+<div class="viewcode-block" id="Student.is_premed"><a class="viewcode-back" href="../student.html#student.Student.is_premed">[docs]</a>    <span class="k">def</span> <span class="nf">is_premed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;True if the student is interested in pre-med.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&#39;major&#39;</span><span class="p">)):</span>
+            <span class="k">return</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">(</span><span class="s">&#39;pre-med&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="s">&#39;major&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;|&quot;</span><span class="p">))</span>
+
+
+<span class="c">#   def update_from_list_lookup(self, key_looked, key_updated, sequences_list, fail_silently=True):</span>
+<span class="c">#       &quot;&quot;&quot;Expects a list of (key, value) sequence pairs. It then compares the items in the key_list against the value in the Student&#39;s key_looked, and updates the key_updated according to the value. Returns an error if it finds multiple keys. Fails silently if it doesn&#39;t find the key, unless set otherwise.&quot;&quot;&quot;</span>
+<span class="c">#       results = [(k, v) for (k,v) in sequences_list if self[key_looked] == k]</span>
+<span class="c">#       if results == []:</span>
+<span class="c">#           if fail_silently: </span>
+<span class="c">#               return()</span>
+<span class="c">#           else:</span>
+<span class="c">#               raise BaseException(&quot;Could not find key &quot; + key_looked + &quot; in list. FIX EXCEPTION TYPE!&quot;)</span>
+<span class="c"># # FIX EXCEPTIONS!!!</span>
+<span class="c">#       elif len(results) &gt; 1:</span>
+<span class="c">#           raise BaseException(&quot;Too many matches for key &quot;+ key_looked + &quot;. FIX EXCEPTION TYPE!&quot;)</span>
+<span class="c">#       else:</span>
+<span class="c">#           self.update({key_updated: v})</span></div>
+    <span class="k">def</span> <span class="nf">string_sub</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span><span class="p">(</span><span class="s">&quot;FIX Student.string.sub!!!!&quot;</span><span class="p">)</span>
+        <span class="c"># return(re.sub(&quot;\\\\pyinsert\{([^\}]*)\}&quot;, lambda x: self.get_key(x.group(1)), str))</span>
+    <span class="k">def</span> <span class="nf">fix_placement</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">PLACEMENT_LONGS</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="s">&quot;placement&quot;</span><span class="p">])):</span>
+            <span class="bp">self</span><span class="p">[</span><span class="s">&quot;placement&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">PLACEMENT_LONGS</span><span class="p">[</span><span class="bp">self</span><span class="p">[</span><span class="s">&quot;placement&quot;</span><span class="p">]]</span>
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="s">&quot;placement&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">):</span>
+            <span class="bp">self</span><span class="p">[</span><span class="s">&quot;placement_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">PLACEMENT_NAMES</span><span class="p">[</span><span class="bp">self</span><span class="p">[</span><span class="s">&quot;placement&quot;</span><span class="p">]]</span>
+        <span class="k">return</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">has_placement</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="s">&quot;placement&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="c"># def premed_line(self):</span>
+    <span class="c">#   if self.is_premed():</span>
+    <span class="c">#       return(&quot;You should talk with your pre-med advisor about whether or not to take calculus your first semester (Fall \\the\\year).&quot;)</span>
+    <span class="c">#   else:</span>
+    <span class="c">#       return(&quot;&quot;)</span>
+
+<div class="viewcode-block" id="Student.perform_placement"><a class="viewcode-back" href="../student.html#student.Student.perform_placement">[docs]</a>    <span class="k">def</span> <span class="nf">perform_placement</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;docstring for perform_placement&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s">&#39;placement&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Placement</span><span class="o">.</span><span class="n">Perform_placement</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">LEAPy 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Charilaos Skiadas.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

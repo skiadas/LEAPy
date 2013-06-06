@@ -1,0 +1,182 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>my_utils &mdash; LEAPy 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="LEAPy 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">LEAPy 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for my_utils</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">urllib</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">jinja2</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">from</span> <span class="nn">my_parser</span> <span class="kn">import</span> <span class="n">parse</span>
+
+<span class="k">def</span> <span class="nf">_splitrow</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+	<span class="n">k</span><span class="p">,</span> <span class="n">o</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;:&quot;</span><span class="p">)</span>
+	<span class="k">return</span><span class="p">((</span><span class="n">k</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">o</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;,&quot;</span><span class="p">)]))</span>
+
+<span class="c">#: This dictionary contains for each field of the Student dictionary all the possible names that this field might be found under in a spreadsheet.</span>
+<span class="n">STUDENT_DICTIONARY</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;key_associations.txt&quot;</span><span class="p">,</span> <span class="s">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">STUDENT_DICTIONARY</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([</span><span class="n">_splitrow</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">f</span><span class="p">])</span>
+<span class="c">#: Used for lookup. It reverses STUDENT_DICTIONARY</span>
+<span class="n">REVERSE_STUDENT_DICTIONARY</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val_list</span><span class="p">)</span> <span class="ow">in</span> <span class="n">STUDENT_DICTIONARY</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">REVERSE_STUDENT_DICTIONARY</span><span class="o">.</span><span class="n">update</span><span class="p">([(</span><span class="n">val</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">val_list</span><span class="p">])</span>
+
+<div class="viewcode-block" id="standardize_key"><a class="viewcode-back" href="../my_utils.html#my_utils.standardize_key">[docs]</a><span class="k">def</span> <span class="nf">standardize_key</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Uses the key associations loaded from :file:`key_associations.txt` to normalize the value of `key`. It returns :keyword:`None` if it does not find the key.&quot;&quot;&quot;</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">STUDENT_DICTIONARY</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">REVERSE_STUDENT_DICTIONARY</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">REVERSE_STUDENT_DICTIONARY</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+</div>
+<div class="viewcode-block" id="Placement"><a class="viewcode-back" href="../my_utils.html#my_utils.Placement">[docs]</a><span class="k">class</span> <span class="nc">Placement</span><span class="p">:</span>
+    <span class="c"># Generic Class. Has 4-5 singletons, one for each possible placement</span>
+    <span class="n">__placements</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">__expressions</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">class</span> <span class="nc">__impl</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+        <span class="k">pass</span>
+        <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;short&#39;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">))</span>
+        <span class="k">def</span> <span class="nf">long</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">))</span>
+    <span class="c"># Populating __placements and __instructions</span>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Placement._process_instructions"><a class="viewcode-back" href="../my_utils.html#my_utils.Placement._process_instructions">[docs]</a>    <span class="k">def</span> <span class="nf">_process_instructions</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;placement_instructions.txt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">all_lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">f</span><span class="p">]</span>
+        <span class="n">newline</span> <span class="o">=</span> <span class="n">all_lines</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">placements</span> <span class="o">=</span> <span class="n">all_lines</span><span class="p">[:</span><span class="n">newline</span><span class="p">]</span>
+        <span class="n">expressions</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;=&gt;&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">all_lines</span><span class="p">[</span><span class="n">newline</span><span class="p">:]</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">l</span><span class="o">==</span><span class="s">&#39;&#39;</span><span class="p">)]</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">placements</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="s">&quot;</span><span class="se">\t</span><span class="s"> &quot;</span><span class="p">):</span>
+                <span class="n">current</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">l</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;:&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">)])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">current</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">):</span>
+                    <span class="n">cls</span><span class="o">.</span><span class="n">__placements</span><span class="p">[</span><span class="n">current</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">__impl</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">current</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
+                <span class="n">current</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;:&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span>
+        <span class="n">cls</span><span class="o">.</span><span class="n">__placements</span><span class="p">[</span><span class="n">current</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">__impl</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">current</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>  <span class="c"># TODO: This is awkward, find better way to end the parsing.</span>
+        <span class="n">cls</span><span class="o">.</span><span class="n">__expressions</span> <span class="o">=</span> <span class="p">[(</span><span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">cls</span><span class="o">.</span><span class="n">__placements</span><span class="p">[</span><span class="n">l</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()])</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">expressions</span><span class="p">]</span>
+</div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Placement.Perform_placement"><a class="viewcode-back" href="../my_utils.html#my_utils.Placement.Perform_placement">[docs]</a>    <span class="k">def</span> <span class="nf">Perform_placement</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">student</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">expr</span><span class="p">,</span> <span class="n">place</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">__expressions</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">parse</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">student</span><span class="p">):</span>
+                <span class="k">return</span><span class="p">(</span><span class="n">place</span><span class="p">)</span>
+</div></div>
+<span class="n">Placement</span><span class="o">.</span><span class="n">_process_instructions</span><span class="p">()</span>
+<span class="c"># Dictionary of helper functions, to be passed to the JINJA environments</span>
+<span class="n">helpers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;room&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;room&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">),</span>
+    <span class="s">&#39;students_room&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">rm</span><span class="p">,</span> <span class="n">students</span><span class="p">:</span> <span class="p">[</span><span class="n">st</span> <span class="k">for</span> <span class="n">st</span> <span class="ow">in</span> <span class="n">students</span> <span class="k">if</span> <span class="n">st</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;room&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">rm</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="c"># Jinja2 environment to be used for exporting to LaTeX templates</span>
+<span class="n">JINJA_TEX_ENV</span> <span class="o">=</span> <span class="n">jinja2</span><span class="o">.</span><span class="n">Environment</span><span class="p">(</span>
+    <span class="n">block_start_string</span> <span class="o">=</span> <span class="s">&#39;\pyblock{&#39;</span><span class="p">,</span>
+    <span class="n">block_end_string</span> <span class="o">=</span> <span class="s">&#39;}&#39;</span><span class="p">,</span>
+    <span class="n">variable_start_string</span> <span class="o">=</span> <span class="s">&#39;\pyvar{&#39;</span><span class="p">,</span>
+    <span class="n">variable_end_string</span> <span class="o">=</span> <span class="s">&#39;}&#39;</span><span class="p">,</span>
+    <span class="n">comment_start_string</span> <span class="o">=</span> <span class="s">&#39;\#{&#39;</span><span class="p">,</span>
+    <span class="n">comment_end_string</span> <span class="o">=</span> <span class="s">&#39;}&#39;</span><span class="p">,</span>
+    <span class="n">line_statement_prefix</span> <span class="o">=</span> <span class="s">&#39;%-&#39;</span><span class="p">,</span>
+    <span class="n">line_comment_prefix</span> <span class="o">=</span> <span class="s">&#39;%#&#39;</span><span class="p">,</span>
+    <span class="n">trim_blocks</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span>
+    <span class="n">autoescape</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span>
+    <span class="n">loader</span> <span class="o">=</span> <span class="n">jinja2</span><span class="o">.</span><span class="n">FileSystemLoader</span><span class="p">(</span><span class="s">&#39;templates&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">JINJA_HTML_ENV</span> <span class="o">=</span> <span class="n">jinja2</span><span class="o">.</span><span class="n">Environment</span><span class="p">(</span><span class="n">loader</span> <span class="o">=</span> <span class="n">jinja2</span><span class="o">.</span><span class="n">FileSystemLoader</span><span class="p">(</span><span class="s">&#39;templates&#39;</span><span class="p">),</span> <span class="n">trim_blocks</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">env</span> <span class="ow">in</span> <span class="p">[</span><span class="n">JINJA_TEX_ENV</span><span class="p">,</span> <span class="n">JINJA_HTML_ENV</span><span class="p">]:</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">globals</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s">&#39;itools&#39;</span><span class="p">:</span> <span class="n">itertools</span><span class="p">,</span> <span class="s">&#39;helpers&#39;</span><span class="p">:</span> <span class="n">helpers</span><span class="p">})</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">LEAPy 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Charilaos Skiadas.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<body>
+	<table>
+		<tr {{- var_decoration|xmlattr }}>
+		{%- for (dec, key) in itools.izip(var_cell_decorations, key_names) -%}
+			<th {{- dec|xmlattr }}>{{ key }}</th>
+		{%- endfor -%}
+		</tr>
+		{%- for (dec, st) in itools.izip(row_decorations, rows) %}
+		<tr {{- dec|xmlattr }}>
+		{%- for (dc, key) in itools.izip(row_cell_decorations, keys) -%}
+			<td {{- dc|xmlattr }}>
+			  {% if st[key] is none %}
+			  {% else %}
+			    {{ st[key] }}
+			  {% endif %}
+			</td>
+		{%- endfor -%}
+		</tr>
+		{%- endfor %}
+	</table>
+</body>
+</html>
