@@ -21,18 +21,19 @@ studexp.export(keys = ["id_num", "last_name", "first_name", "preferred", "actmt"
 # This is the key command, preparing the documents for Jan
 studexp.export(keys = ["id_num", "last_name", "first_name", "preferred", "placement score", "placement"], file = "PlacementsForJan3.xls")
 
+test_placement = lambda st: not(st.get("placement").get("code") == 'none')
+students = StudentList(students.dataset().subset(test_placement))
+
+with open("testing.tex", "w") as f:
+  f.write(students.export_template('tex_letter_template_barb.tex', sortby = lambda st: st['last_name']))
+
 # Reading students for Room printouts
 students2 = StudentList(Dataset.Read("LEAPFiles/LEAP3Rooms.xls"))
 students2.update_from_dataset("id", scores, target_key = "Student ID")
 students2.update_from_dataset("id", interest_survey, target_key = "ID")
 students2.perform_placement()
 
-test_placement = lambda st: not(st.get("placement").get("code") == 'none')
-students = StudentList(students.dataset().subset(test_placement))
-
-with open("testing.tex", "w") as f:
-  f.write(students.export_template('tex_letter_template.tex', sortby = lambda st: st['last_name']))
 
 with open("rooms.tex", "w") as f:
   f.write(students2.export_template('tex_rooms_template.tex', sortby = lambda st: st['room']))
-
+# 

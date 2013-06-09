@@ -1,70 +1,93 @@
 \documentclass[12pt]{article}
-\usepackage[vmargin=1in, hmargin=1in]{geometry}
+% \usepackage{fourier}
+% \usepackage{bera}
+\usepackage[default]{droidserif}
+\usepackage[T1]{fontenc}
+\usepackage[vmargin=0.8in, hmargin=1in]{geometry}
 \usepackage{setspace}
 \usepackage{paralist}
-\doublespacing
+% \doublespacing
+\linespread{1.5}
 \pagestyle{empty}
 \begin{document}
 
-\pyblock{for rm, stds in itools.groupby(students, helpers.room)}
+\pyblock{for st in students}
 	\newpage
-	{\ }
-		\vfill
-	\begin{center}
-	{\Huge
-	\textbf{Room\\
+	{\noindent\Large ID: \pyvar{st.id_num}\\
+	Student: \pyvar{st.last}, \pyvar{st.first} \\
+	Placement: \pyvar{st.placement.name}
+	}
+	\vspace{0.2in}
+	\hrule
 	\vspace{0.5in}
-	\pyvar{rm}}
-	}\\
-	\vfill
-	\pyblock{for st in helpers.students_room(rm, students)}
-		\pyvar{st.last}, \pyvar{st.first}, \pyvar{st.placement.short} (\pyvar{st.acad})\\
-	\pyblock{endfor}
-	\end{center}
-	\vfill
-	\pyblock{for st in stds}
-		\newpage
-		{\Large Student: \pyvar{st.last}, \pyvar{st.first}\\
-		Placement: \pyvar{st.placement.short} (\pyvar{st.placement.name})
-		}
-		\vspace{0.2in}
-		\hrule
-		\vspace{0.6in}
-		\noindent\today\\
+	\noindent\today\\
+  
+	\vspace{0.2in}
+	\noindent Dear \pyvar{st.first},
+	\vspace{0.2in}
 
-		\vspace{0.2in}
-		\noindent Dear \pyvar{st.first},
-		\vspace{0.2in}
+		Thank you for taking the online math interest survey\pyblock{if st.took_test()} and the online placement test\pyblock{endif}.
 
-		Thank you for taking the calculus interest survey and the online placement exam.
-		\pyblock{if not(st.placement.code == "dept")}
-    		 Based on your survey responses and exam score, the Math department recommends you begin calculus at Hanover by taking \pyvar{st.placement.short}.  
-    		\pyblock{if st.is_premed()}
-    			You should talk with your pre-health advisor about whether or not to take calculus your first semester (Fall \the\year).
-    		\pyblock{endif}
-		
-    		\pyblock{if st.placement.code == "Mat 121e"}
-    		Depending on how much calculus you have learned in high school, and how much you want to push yourself during your first semester at Hanover, you may wish to skip Math 121 and begin instead with Math 122 (Calculus II).  Please discuss this option with me during LEAP if you are interested.
-    		\pyblock{endif}
-    	\pyblock{endif}
-    	\pyblock{if st.placement.code == "dept"}
-    	The department was not able to place you in a Calculus course.
-    	\pyblock{if st.placement_score < 10}
-    	Your score in the placement test was very low, under \( 10 \), indicating difficulties with the precalculus material needed for our Calculus sequences.
-	    \pyblock{endif}
-	    \pyblock{if st.placement_score >= 10 and not(st.has_precalc()) and not(st.has_calc())}
-        You indicated on your survey that you have taken neither precalculus nor calculus in high school.
+		\pyblock{if st.placement.code=="notcalc"}
+        \pyblock{if not(st.survey_result==3)}
+		    Based on your answers, you will not need to take a math course in your first semester at Hanover. Depending on your interests, you may need/choose to take Applied Statistics in the future, or you may satisfy the AFR requirement via another course. 
+	      \pyblock{else}
+		    Based on your answers, you will not need to take a math course in your first semester at Hanover. You may be earning AP/Transfer credit for MAT 121, which will also satisfy your AFR requirement. Depending on your interests, you may need/choose to take Applied Statistics in the future, or you may satisfy the AFR requirement via another course (if needed).
+	      \pyblock{endif}
+	  \pyblock{endif}
+	  
+	  
+		\pyblock{if not(st.placement.code=="notcalc" or st.placement.code =="dept")}
+      Based on your answers, the Math department recommends you begin calculus at Hanover by taking \pyvar{st.placement.name}.
+
+
+      \pyblock{if st.placement.code == "Mat 121c"}
+      You may be earning AP/Transfer credit for MAT 121. In any case, if you are planning to continue with MAT 122 Calculus II, you should consider bypassing MAT 121 and starting with MAT 122 this Fall. If you are interested, please discuss this option with me during LEAP.
+      \pyblock{endif}
+      \pyblock{if st.placement.code == "Mat 111"}
+      		Students who are not particularly strong in Math may find Calculus too challenging as they transition to college-level expectations. You may want to discuss with me during LEAP the possibility of delaying Calculus for a year.
+      \pyblock{endif}
+    \pyblock{endif}
+
+
+
+
+    \pyblock{if st.placement.code == "dept"}
+      Based on your survey answers, we think you may need to take Calculus at Hanover. However, the department was not able to place you in a Calculus course.
+    	\pyblock{if not(st.took_test())}
+        According to our records, you did not take the online placement exam. Because of this, we are not able to give you a Calculus placement.
+      \pyblock{else}
+      	\pyblock{if st.placement_score < 10}
+      	Your score in the placement test was very low, under \( 10 \), indicating difficulties with the precalculus material needed for our Calculus sequences.
+  	    \pyblock{endif}
+  	    \pyblock{if st.placement_score >= 10 and not(st.has_precalc()) and not(st.has_calc())}
+          You indicated on your survey that you have taken neither precalculus nor calculus in high school.
         \pyblock{endif}
-	    Based on this, the department did not think you were ready to take Calculus. If you feel that this information was incorrect, and you want to take Calculus at Hanover, please talk to me at some point during LEAP. Depending on what major you are interested in pursuing, other options might be more suitable. We can discuss these further if you like.
-    	\pyblock{endif}
-    	
+	      Based on this, the department did not think you were ready to take Calculus. 
+      \pyblock{endif}
+      If you do want to take Calculus at Hanover, please talk to me at some point during LEAP.
+  	\pyblock{endif}
+
+
+
+    \pyblock{if (st.placement.code == "Mat 121" or st.placement.code == "Mat 121c")}
+    If you decide to take Calculus I, and have an interest in possibly continuing with Calculus II in the Winter, make sure to avoid taking a Great Works session at MTWF 9--10am.
+    \pyblock{endif}
+    
+    \pyblock{if st.placement.code == "Mat 121c"}
+    If you decide to start with Calculus II, and have an interest in possibly continuing with Calculus III in the Winter, make sure to avoid taking a Great Works session at MWRF 1--2pm.
+    \pyblock{endif}
+    
+    \pyblock{if st.placement.code == "Mat 111"}
+    If you do decide to take Calculus with Review I, make sure to avoid taking a Great Works session at TR 8-10am, since the continuation of Calculus with Review in the Winter is at that time.
+    \pyblock{endif}
+
 		If you have any questions or concerns about mathematics at Hanover College, please feel free to talk them over with me during LEAP, or contact the math department by email at \texttt{mathplacement@hanover.edu}
-		\vspace{0.5in}
+		\vspace{0.4in}
 
 		\noindent Best regards,\\
-		Barbara Wahl\\
-		Department of Mathematics \& Computer Science\\
+		Barb Wahl\\
+		Department of Mathematics\\
 		Hanover College
-	\pyblock{endfor}
 \pyblock{endfor}
 \end{document}
