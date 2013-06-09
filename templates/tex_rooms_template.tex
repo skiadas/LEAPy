@@ -4,6 +4,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{setspace}
 \usepackage{paralist}
+\usepackage{longtable}
 \doublespacing
 \pagestyle{empty}
 \begin{document}
@@ -17,11 +18,11 @@
 	}\\
 	\vspace{0.5in}
 	\vfill
-	\begin{tabular}{lrr}
+	\begin{longtable}{lrr}
 	\pyblock{for st in helpers.students_room(rm, students)}
 		\pyvar{st.last}, \pyvar{st.first} & \pyvar{st.placement.short} & \pyvar{st.acad}\\
 	\pyblock{endfor}
-  \end{tabular}
+  \end{longtable}
 	\end{center}
 	\vfill
 \pyblock{endfor}
