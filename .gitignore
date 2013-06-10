@@ -3,6 +3,7 @@ testing*
 rooms.*
 PlacementsForJan*
 LEAPFiles/
+*LEAP*/
 *.zip
 .DS_Store
 *.pyc
